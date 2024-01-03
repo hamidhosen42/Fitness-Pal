@@ -11,7 +11,8 @@ class RoundTextField extends StatelessWidget {
   final Widget? rigtIcon;
   final bool obscureText;
   final EdgeInsets? margin;
-  const RoundTextField({super.key, required this.hitText, required this.icon, this.controller, this.margin, this.keyboardType, this.obscureText = false , this.rigtIcon });
+  final bool? isRequired;
+  const RoundTextField({super.key, required this.hitText, required this.icon, this.controller, this.margin, this.keyboardType, this.obscureText = false , this.rigtIcon,this.isRequired });
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +20,18 @@ class RoundTextField extends StatelessWidget {
       margin: margin,
       decoration: BoxDecoration(
           color: TColor.lightGray, borderRadius: BorderRadius.circular(15)),
-      child: TextField(
+      child: TextFormField(
         controller: controller,
         keyboardType: keyboardType,
         obscureText: obscureText,
+        validator: isRequired == true
+            ? (value) {
+                if (value!.isEmpty) {
+                  return "The Field is required";
+                }
+                return null;
+              }
+            : null,
         decoration: InputDecoration(
             contentPadding:
                 const EdgeInsets.symmetric(vertical: 15, horizontal: 15),

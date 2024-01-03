@@ -138,6 +138,10 @@ class _SignUpViewState extends State<SignUpView> {
                                   'l_name': _lastNameController.text,
                                   'uid': FirebaseAuth.instance.currentUser!.uid,
                                   "image": "",
+                                  "gender":"",
+                                  "date":"",
+                                  "weight":"",
+                                  "height":""
                                 }).then((value) {
                                   Navigator.push(
                                       context,
@@ -161,6 +165,10 @@ class _SignUpViewState extends State<SignUpView> {
                                   'l_name': _lastNameController.text,
                                   'uid': FirebaseAuth.instance.currentUser!.uid,
                                   "image": "",
+                                  "gender":"",
+                                  "date":"",
+                                  "weight":"",
+                                  "height":""
                                 }).then((value) {
                                   Navigator.push(
                                       context,
