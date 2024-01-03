@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fitness/view/login/welcome_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/colo_extension.dart';
 import '../../common_widget/round_button.dart';
@@ -139,6 +140,9 @@ class _WhatYourGoalViewState extends State<WhatYourGoalView> {
                           MaterialPageRoute(
                               builder: (context) => const WelcomeView()));
                     }),
+                SizedBox(
+                  height: 20.h,
+                ),
               ],
             ),
           )
