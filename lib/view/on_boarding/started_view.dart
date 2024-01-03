@@ -47,7 +47,7 @@ class _StartedViewState extends State<StartedView> {
                   Text(
                     "X",
                     style: TextStyle(
-                        color: TColor.primaryColor1,
+                        color:isChangeColor?TColor.white: TColor.primaryColor1,
                         fontSize: 40,
                         fontWeight: FontWeight.w700),
                   ),

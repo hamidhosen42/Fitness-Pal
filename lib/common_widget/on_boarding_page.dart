@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../common/colo_extension.dart';
 
@@ -11,7 +12,6 @@ class OnBoardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
      var media = MediaQuery.of(context).size;
     return 
-    
     SizedBox(
       width: media.width,
       height: media.height,
@@ -28,7 +28,7 @@ class OnBoardingPage extends StatelessWidget {
             height: media.width * 0.1,
           ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Text(
               pObj["title"].toString(),
               style: TextStyle(
@@ -37,8 +37,11 @@ class OnBoardingPage extends StatelessWidget {
                   fontWeight: FontWeight.w700),
             ),
           ),
+          SizedBox(
+            height: 10.h,
+          ),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15),
+            padding: EdgeInsets.symmetric(horizontal: 15.w),
             child: Text(
               pObj["subtitle"].toString(),
               style: TextStyle(color: TColor.gray, fontSize: 14),
