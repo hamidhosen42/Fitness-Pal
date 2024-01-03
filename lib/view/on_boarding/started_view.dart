@@ -1,9 +1,11 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/view/on_boarding/on_boarding_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common_widget/round_button.dart';
+import '../main_tab/main_tab_view.dart';
 
 class StartedView extends StatefulWidget {
   const StartedView({super.key});
@@ -14,6 +16,7 @@ class StartedView extends StatefulWidget {
 
 class _StartedViewState extends State<StartedView> {
   bool isChangeColor = false;
+  final user = FirebaseAuth.instance.currentUser;
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +50,8 @@ class _StartedViewState extends State<StartedView> {
                   Text(
                     "X",
                     style: TextStyle(
-                        color:isChangeColor?TColor.white: TColor.primaryColor1,
+                        color:
+                            isChangeColor ? TColor.white : TColor.primaryColor1,
                         fontSize: 40,
                         fontWeight: FontWeight.w700),
                   ),
@@ -72,10 +76,17 @@ class _StartedViewState extends State<StartedView> {
                     onPressed: () {
                       if (isChangeColor) {
                         //GO Next Screen
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const OnBoardingView()));
+
+                        user != null
+                            ? Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MainTabView()))
+                            : Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const OnBoardingView()));
                       } else {
                         //Change Color
                         setState(() {
@@ -86,7 +97,9 @@ class _StartedViewState extends State<StartedView> {
                   ),
                 ),
               ),
-              SizedBox(height: 20.h,),
+              SizedBox(
+                height: 20.h,
+              ),
             ],
           )),
     );

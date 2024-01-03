@@ -1,3 +1,6 @@
+// ignore_for_file: prefer_const_constructors
+
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/colo_extension.dart';
@@ -5,6 +8,8 @@ import '../../common_widget/round_button.dart';
 import '../../common_widget/setting_row.dart';
 import '../../common_widget/title_subtitle_cell.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
+
+import '../Authentication/LoginScreen/login_view.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});
@@ -51,7 +56,14 @@ class _ProfileViewState extends State<ProfileView> {
         ),
         actions: [
           InkWell(
-            onTap: () {},
+            onTap: () {
+
+               FirebaseAuth.instance.signOut();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => LoginView()),
+                        (route) => false);
+            },
             child: Container(
               margin: const EdgeInsets.all(8),
               height: 40,
@@ -60,12 +72,7 @@ class _ProfileViewState extends State<ProfileView> {
               decoration: BoxDecoration(
                   color: TColor.lightGray,
                   borderRadius: BorderRadius.circular(10)),
-              child: Image.asset(
-                "assets/img/more_btn.png",
-                width: 15,
-                height: 15,
-                fit: BoxFit.contain,
-              ),
+              child: Icon(Icons.login_rounded,size: 30,),
             ),
           )
         ],

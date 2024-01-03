@@ -12,7 +12,9 @@ class RoundTextField extends StatelessWidget {
   final bool obscureText;
   final EdgeInsets? margin;
   final bool? isRequired;
-  const RoundTextField({super.key, required this.hitText, required this.icon, this.controller, this.margin, this.keyboardType, this.obscureText = false , this.rigtIcon,this.isRequired });
+  final bool? secured;
+    final Widget? suffixIcon;
+  const RoundTextField({super.key, required this.hitText, required this.icon, this.controller, this.margin, this.keyboardType, this.obscureText = false , this.rigtIcon,this.isRequired,    this.secured,    this.suffixIcon, });
 
   @override
   Widget build(BuildContext context) {

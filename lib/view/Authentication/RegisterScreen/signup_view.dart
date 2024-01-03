@@ -3,15 +3,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/common/colo_extension.dart';
-import 'package:fitness/view/login/complete_profile_view.dart';
-import 'package:fitness/view/login/login_view.dart';
+import 'package:fitness/view/Authentication/complete_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../common_widget/custom_button.dart';
-import '../../helper/form_helper.dart';
+import '../../../common_widget/round_button.dart';
+import '../../../common_widget/round_textfield.dart';
+import '../LoginScreen/login_view.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -44,7 +44,7 @@ class _SignUpViewState extends State<SignUpView> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 SizedBox(
-                  height: 50.h,
+                  height: 70.h,
                 ),
                 Text(
                   "Hey there,",
@@ -64,27 +64,27 @@ class _SignUpViewState extends State<SignUpView> {
                   key: _formState,
                   child: Column(
                     children: [
-                      CutomTextField(
+                      RoundTextField(
                         controller: _firstNamelController,
-                        hintText: "First Name",
-                        isRequired: true,
+                        hitText: "First Name",
                         icon: "assets/img/user_text.png",
+                        isRequired: true,
                       ),
                       SizedBox(
                         height: 15.h,
                       ),
-                      CutomTextField(
+                      RoundTextField(
                         controller: _lastNameController,
-                        hintText: "Last Name",
-                        isRequired: true,
+                        hitText: "Last Name",
                         icon: "assets/img/user_text.png",
+                        isRequired: true,
                       ),
                       SizedBox(
                         height: media.width * 0.04,
                       ),
-                      CutomTextField(
+                      RoundTextField(
                         controller: _emailController,
-                        hintText: "Email",
+                        hitText: "Email",
                         isRequired: true,
                         icon: "assets/img/email.png",
                         keyboardType: TextInputType.emailAddress,
@@ -92,9 +92,9 @@ class _SignUpViewState extends State<SignUpView> {
                       SizedBox(
                         height: media.width * 0.04,
                       ),
-                      CutomTextField(
+                      RoundTextField(
                         controller: _passwordController,
-                        hintText: "Password",
+                        hitText: "Password",
                         isRequired: true,
                         secured: isPasswordSecured,
                         suffixIcon: IconButton(
@@ -111,9 +111,9 @@ class _SignUpViewState extends State<SignUpView> {
                       SizedBox(
                         height: media.width * 0.1,
                       ),
-                      CustomButton(
-                        btnTitle: "Register",
-                        onTap: () async {
+                      RoundButton(
+                        title: "Register",
+                        onPressed: () async {
                           if (_formState.currentState!.validate()) {
                             try {
                               await _auth.createUserWithEmailAndPassword(
@@ -138,10 +138,10 @@ class _SignUpViewState extends State<SignUpView> {
                                   'l_name': _lastNameController.text,
                                   'uid': FirebaseAuth.instance.currentUser!.uid,
                                   "image": "",
-                                  "gender":"",
-                                  "date":"",
-                                  "weight":"",
-                                  "height":""
+                                  "gender": "",
+                                  "date": "",
+                                  "weight": "",
+                                  "height": ""
                                 }).then((value) {
                                   Navigator.push(
                                       context,
@@ -165,10 +165,10 @@ class _SignUpViewState extends State<SignUpView> {
                                   'l_name': _lastNameController.text,
                                   'uid': FirebaseAuth.instance.currentUser!.uid,
                                   "image": "",
-                                  "gender":"",
-                                  "date":"",
-                                  "weight":"",
-                                  "height":""
+                                  "gender": "",
+                                  "date": "",
+                                  "weight": "",
+                                  "height": ""
                                 }).then((value) {
                                   Navigator.push(
                                       context,
@@ -197,81 +197,6 @@ class _SignUpViewState extends State<SignUpView> {
                       ),
                     ],
                   ),
-                ),
-                SizedBox(
-                  height: media.width * 0.04,
-                ),
-                Row(
-                  // crossAxisAlignment: CrossAxisAlignment.,
-                  children: [
-                    Expanded(
-                        child: Container(
-                      height: 1,
-                      color: TColor.gray.withOpacity(0.5),
-                    )),
-                    Text(
-                      "  Or  ",
-                      style: TextStyle(color: TColor.black, fontSize: 12),
-                    ),
-                    Expanded(
-                        child: Container(
-                      height: 1,
-                      color: TColor.gray.withOpacity(0.5),
-                    )),
-                  ],
-                ),
-                SizedBox(
-                  height: media.width * 0.04,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: TColor.white,
-                          border: Border.all(
-                            width: 1,
-                            color: TColor.gray.withOpacity(0.4),
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Image.asset(
-                          "assets/img/google.png",
-                          width: 20,
-                          height: 20,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: media.width * 0.04,
-                    ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Container(
-                        width: 50,
-                        height: 50,
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: TColor.white,
-                          border: Border.all(
-                            width: 1,
-                            color: TColor.gray.withOpacity(0.4),
-                          ),
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Image.asset(
-                          "assets/img/facebook.png",
-                          width: 20,
-                          height: 20,
-                        ),
-                      ),
-                    )
-                  ],
                 ),
                 SizedBox(
                   height: media.width * 0.04,
