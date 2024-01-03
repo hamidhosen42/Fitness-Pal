@@ -4,6 +4,7 @@ import 'package:fitness/common_widget/round_textfield.dart';
 import 'package:fitness/view/login/complete_profile_view.dart';
 import 'package:fitness/view/login/login_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SignUpView extends StatefulWidget {
   const SignUpView({super.key});
@@ -26,6 +27,9 @@ class _SignUpViewState extends State<SignUpView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 50.h,
+                ),
                 Text(
                   "Hey there,",
                   style: TextStyle(color: TColor.gray, fontSize: 16),
@@ -108,7 +112,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ],
                 ),
                 SizedBox(
-                  height: media.width * 0.4,
+                  height: media.width * 0.2,
                 ),
                 RoundButton(title: "Register", onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) => const CompleteProfileView()  ));

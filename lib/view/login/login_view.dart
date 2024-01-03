@@ -3,6 +3,7 @@ import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/round_textfield.dart';
 import 'package:fitness/view/login/complete_profile_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -26,6 +27,9 @@ class _LoginViewState extends State<LoginView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  height: 50.h,
+                ),
                 Text(
                   "Hey there,",
                   style: TextStyle(color: TColor.gray, fontSize: 16),
@@ -69,6 +73,9 @@ class _LoginViewState extends State<LoginView> {
                             color: TColor.gray,
                           ))),
                 ),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -76,7 +83,7 @@ class _LoginViewState extends State<LoginView> {
                       "Forgot your password?",
                       style: TextStyle(
                           color: TColor.gray,
-                          fontSize: 10,
+                          fontSize: 12,
                           decoration: TextDecoration.underline),
                     ),
                   ],
