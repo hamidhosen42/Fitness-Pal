@@ -1,5 +1,6 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/colo_extension.dart';
 import '../../common_widget/latest_activity_row.dart';
@@ -14,6 +15,43 @@ class ActivityTrackerView extends StatefulWidget {
 
 class _ActivityTrackerViewState extends State<ActivityTrackerView> {
     int touchedIndex = -1;
+
+
+  bool isWeeklySelected = true; // Default selection is "Weekly"
+
+  List<List<double>> weeklyData = [
+    [5, 10.5, 5, 7.5, 15, 5.5, 8.5], // Example data for the week
+  ];
+
+  List<List<double>> monthlyData = [
+    [15, 12, 20, 18, 25, 22, 28], // Example data for the month
+  ];
+
+List<BarChartGroupData> showingGroups() {
+  List<List<double>> selectedData = isWeeklySelected ? weeklyData : monthlyData;
+
+  return List.generate(7, (index) {
+    List<double> data = selectedData[0]; // Assuming only one set of data for simplicity
+
+    return BarChartGroupData(
+      x: index,
+      barsSpace: 2,
+      barRods: [
+        BarChartRodData(
+          toY: data[index],
+          // toY: 0, // Add the toY argument here, adjust it based on your data structure
+          color: touchedIndex == index ? Colors.yellow : TColor.primaryColor1,
+          width: 16,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(6),
+            topRight: Radius.circular(6),
+          ),
+        ),
+      ],
+    );
+  });
+}
+
 
   List latestArr = [
     {
@@ -111,8 +149,8 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                               fontWeight: FontWeight.w700),
                         ),
                         SizedBox(
-                          width: 30,
-                          height: 30,
+                          width: 30.w,
+                          height: 30.h,
                           child: Container(
                             decoration: BoxDecoration(
                               gradient: LinearGradient(
@@ -198,10 +236,14 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                                     ),
                                   ))
                               .toList(),
-                          onChanged: (value) {},
+                          onChanged: (value) {
+                             setState(() {
+                      isWeeklySelected = value == "Weekly";
+                    });
+                          },
                           icon: Icon(Icons.expand_more, color: TColor.white),
                           hint: Text(
-                            "Weekly",
+                        isWeeklySelected ? "Weekly" : "Monthly",
                             textAlign: TextAlign.center,
                             style: TextStyle(color: TColor.white, fontSize: 12),
                           ),
@@ -317,8 +359,7 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
                   ),
                   barGroups: showingGroups(),
                   gridData:  FlGridData(show: false),
-                )
-                    
+                )  
                   ),
               ),
               
@@ -405,26 +446,26 @@ class _ActivityTrackerViewState extends State<ActivityTrackerView> {
       child: text,
     );
   }
-   List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
-        switch (i) {
-          case 0:
-            return makeGroupData(0, 5, TColor.primaryG , isTouched: i == touchedIndex);
-          case 1:
-            return makeGroupData(1, 10.5, TColor.secondaryG, isTouched: i == touchedIndex);
-          case 2:
-            return makeGroupData(2, 5, TColor.primaryG , isTouched: i == touchedIndex);
-          case 3:
-            return makeGroupData(3, 7.5, TColor.secondaryG, isTouched: i == touchedIndex);
-          case 4:
-            return makeGroupData(4, 15, TColor.primaryG , isTouched: i == touchedIndex);
-          case 5:
-            return makeGroupData(5, 5.5, TColor.secondaryG, isTouched: i == touchedIndex);
-          case 6:
-            return makeGroupData(6, 8.5, TColor.primaryG , isTouched: i == touchedIndex);
-          default:
-            return throw Error();
-        }
-      });
+  //  List<BarChartGroupData> showingGroups() => List.generate(7, (i) {
+  //       switch (i) {
+  //         case 0:
+  //           return makeGroupData(0, 5, TColor.primaryG , isTouched: i == touchedIndex);
+  //         case 1:
+  //           return makeGroupData(1, 10.5, TColor.secondaryG, isTouched: i == touchedIndex);
+  //         case 2:
+  //           return makeGroupData(2, 5, TColor.primaryG , isTouched: i == touchedIndex);
+  //         case 3:
+  //           return makeGroupData(3, 7.5, TColor.secondaryG, isTouched: i == touchedIndex);
+  //         case 4:
+  //           return makeGroupData(4, 15, TColor.primaryG , isTouched: i == touchedIndex);
+  //         case 5:
+  //           return makeGroupData(5, 5.5, TColor.secondaryG, isTouched: i == touchedIndex);
+  //         case 6:
+  //           return makeGroupData(6, 8.5, TColor.primaryG , isTouched: i == touchedIndex);
+  //         default:
+  //           return throw Error();
+  //       }
+  //     });
 
     BarChartGroupData makeGroupData(
     int x,

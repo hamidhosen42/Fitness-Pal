@@ -3,6 +3,7 @@ import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/workout_row.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 import 'package:simple_circular_progress_bar/simple_circular_progress_bar.dart';
 import '../../common/colo_extension.dart';
@@ -120,6 +121,7 @@ class _HomeViewState extends State<HomeView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 10.h,),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -131,7 +133,7 @@ class _HomeViewState extends State<HomeView> {
                           style: TextStyle(color: TColor.gray, fontSize: 12),
                         ),
                         Text(
-                          "Stefani Wong",
+                          "Hamid Hosen",
                           style: TextStyle(
                               color: TColor.black,
                               fontSize: 20,
@@ -216,12 +218,12 @@ class _HomeViewState extends State<HomeView> {
                                   touchCallback:
                                       (FlTouchEvent event, pieTouchResponse) {},
                                 ),
-                                startDegreeOffset: 250,
+                                startDegreeOffset: 200,
                                 borderData: FlBorderData(
                                   show: false,
                                 ),
                                 sectionsSpace: 1,
-                                centerSpaceRadius: 0,
+                                centerSpaceRadius: 5,
                                 sections: showingSections(),
                               ),
                             ),
@@ -957,7 +959,6 @@ class _HomeViewState extends State<HomeView> {
       2,
       (i) {
         var color0 = TColor.secondaryColor1;
-
         switch (i) {
           case 0:
             return PieChartSectionData(

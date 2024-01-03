@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'common/colo_extension.dart';
+import 'view/main_tab/main_tab_view.dart';
 import 'view/on_boarding/started_view.dart';
 
 void main() {
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               primaryColor: TColor.primaryColor1, fontFamily: "Poppins"),
-          home: const StartedView(),
+          // home: const StartedView(),
+          home: const MainTabView(),
         );
       },
     );
