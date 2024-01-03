@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'common/colo_extension.dart';
-import 'view/main_tab/main_tab_view.dart';
-import 'view/on_boarding/started_view.dart';
+import 'view/SplashScreen/splash_screen.dart';
 
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
@@ -23,11 +22,11 @@ class MyApp extends StatelessWidget {
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_, child) {
         return MaterialApp(
-          title: 'Fitness',
+          title: 'Fitness Pal',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               primaryColor: TColor.primaryColor1, fontFamily: "Poppins"),
-          home: const StartedView(),
+          home: const SplashScreen(),
           // home: const MainTabView(),
         );
       },

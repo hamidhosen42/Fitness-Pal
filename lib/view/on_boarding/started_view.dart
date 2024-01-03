@@ -41,14 +41,14 @@ class _StartedViewState extends State<StartedView> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "Fitnest",
+                    "Fitness",
                     style: TextStyle(
                         color: TColor.black,
                         fontSize: 36,
                         fontWeight: FontWeight.w700),
                   ),
                   Text(
-                    "X",
+                    "Pal",
                     style: TextStyle(
                         color:
                             isChangeColor ? TColor.white : TColor.primaryColor1,
@@ -77,12 +77,7 @@ class _StartedViewState extends State<StartedView> {
                       if (isChangeColor) {
                         //GO Next Screen
 
-                        user != null
-                            ? Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const MainTabView()))
-                            : Navigator.push(
+                       Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>

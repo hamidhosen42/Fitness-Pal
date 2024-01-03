@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/common_widget/round_button.dart';
 import 'package:fitness/common_widget/workout_row.dart';
 import 'package:fl_chart/fl_chart.dart';
@@ -19,6 +21,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  final fireStore = FirebaseFirestore.instance;
   List lastWorkoutArr = [
     {
       "name": "Full Body Workout",
@@ -121,7 +124,9 @@ class _HomeViewState extends State<HomeView> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 10.h,),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -130,15 +135,32 @@ class _HomeViewState extends State<HomeView> {
                       children: [
                         Text(
                           "Welcome Back,",
-                          style: TextStyle(color: TColor.gray, fontSize: 12),
+                          style: TextStyle(color: TColor.gray, fontSize: 12.sp),
                         ),
-                        Text(
-                          "Hamid Hosen",
-                          style: TextStyle(
-                              color: TColor.black,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700),
-                        ),
+                        StreamBuilder(
+                            stream: fireStore
+                                .collection('users')
+                                .doc(FirebaseAuth.instance.currentUser!.email)
+                                .snapshots(),
+                            builder: ((context, snapshot) {
+                              final data = snapshot.data;
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                      color: Colors.black),
+                                );
+                              } else {
+                                return Text(
+                                  "${data!['f_name']} ${data['l_name']}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20.sp,
+                                    color: TColor.black,
+                                  ),
+                                );
+                              }
+                            })),
                       ],
                     ),
                     IconButton(

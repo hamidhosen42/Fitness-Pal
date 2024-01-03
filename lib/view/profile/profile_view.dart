@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/colo_extension.dart';
 import '../../common_widget/round_button.dart';
@@ -20,6 +22,7 @@ class ProfileView extends StatefulWidget {
 
 class _ProfileViewState extends State<ProfileView> {
   bool positive = false;
+    final fireStore = FirebaseFirestore.instance;
 
   List accountArr = [
     {"image": "assets/img/p_personal.png", "name": "Personal Data", "tag": "1"},
@@ -52,12 +55,11 @@ class _ProfileViewState extends State<ProfileView> {
         title: Text(
           "Profile",
           style: TextStyle(
-              color: TColor.black, fontSize: 16, fontWeight: FontWeight.w700),
+              color: TColor.black, fontSize: 18.sp, fontWeight: FontWeight.w700),
         ),
         actions: [
           InkWell(
             onTap: () {
-
                FirebaseAuth.instance.signOut();
                     Navigator.pushAndRemoveUntil(
                         context,
@@ -86,40 +88,30 @@ class _ProfileViewState extends State<ProfileView> {
             children: [
               Row(
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadius.circular(30),
-                    child: Image.asset(
-                      "assets/img/u2.png",
-                      width: 50,
-                      height: 50,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 15,
-                  ),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Stefani Wong",
-                          style: TextStyle(
-                            color: TColor.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          "Lose a Fat Program",
-                          style: TextStyle(
-                            color: TColor.gray,
-                            fontSize: 12,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
+                  StreamBuilder(
+                            stream: fireStore
+                                .collection('users')
+                                .doc(FirebaseAuth.instance.currentUser!.email)
+                                .snapshots(),
+                            builder: ((context, snapshot) {
+                              final data = snapshot.data;
+                              if (snapshot.connectionState ==
+                                  ConnectionState.waiting) {
+                                return const Center(
+                                  child: CircularProgressIndicator(
+                                      color: Colors.black),
+                                );
+                              } else {
+                                return Text(
+                                  "${data!['f_name']} ${data['l_name']}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 20.sp,
+                                    color: TColor.black,
+                                  ),
+                                );
+                              }
+                            })),
                   SizedBox(
                     width: 70,
                     height: 25,
