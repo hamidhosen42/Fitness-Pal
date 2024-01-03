@@ -257,7 +257,7 @@ class _HomeViewState extends State<HomeView> {
                         width: 70,
                         height: 25,
                         child: RoundButton(
-                          title: "Check",
+                          // title: "Check",
                           type: RoundButtonType.bgGradient,
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
