@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/colo_extension.dart';
 import '../../common_widget/round_button.dart';
@@ -22,7 +23,6 @@ class _FinishedWorkoutViewState extends State<FinishedWorkoutView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-        
               const SizedBox(height: 20,),
               Image.asset(
                 "assets/img/complete_workout.png",
@@ -77,11 +77,9 @@ class _FinishedWorkoutViewState extends State<FinishedWorkoutView> {
                     Navigator.pop(context);
                   }),
 
-                 const SizedBox(
-                height: 8,
+                 SizedBox(
+                height: 20.h,
               ),
-
-
 
             ],
           ),

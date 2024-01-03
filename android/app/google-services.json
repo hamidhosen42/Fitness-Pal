@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "259480006600",
+    "project_id": "fitnesspal-8dceb",
+    "storage_bucket": "fitnesspal-8dceb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:259480006600:android:6979c1ba9c6178b6f35afd",
+        "android_client_info": {
+          "package_name": "com.codeforany.fitness"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRiPmiE_gfLlUAGiSeb3v6k9yJFiSvsJM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
