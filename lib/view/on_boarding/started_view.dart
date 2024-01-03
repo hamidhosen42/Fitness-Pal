@@ -1,6 +1,7 @@
 import 'package:fitness/common/colo_extension.dart';
 import 'package:fitness/view/on_boarding/on_boarding_view.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common_widget/round_button.dart';
 
@@ -33,12 +34,24 @@ class _StartedViewState extends State<StartedView> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const Spacer(),
-              Text(
-                "Fitness",
-                style: TextStyle(
-                    color: TColor.black,
-                    fontSize: 36,
-                    fontWeight: FontWeight.w700),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(
+                    "Fitnest",
+                    style: TextStyle(
+                        color: TColor.black,
+                        fontSize: 36,
+                        fontWeight: FontWeight.w700),
+                  ),
+                  Text(
+                    "X",
+                    style: TextStyle(
+                        color: TColor.primaryColor1,
+                        fontSize: 40,
+                        fontWeight: FontWeight.w700),
+                  ),
+                ],
               ),
               Text(
                 "Everybody Can Train",
@@ -72,7 +85,8 @@ class _StartedViewState extends State<StartedView> {
                     },
                   ),
                 ),
-              )
+              ),
+              SizedBox(height: 20.h,),
             ],
           )),
     );

@@ -45,6 +45,7 @@ dependencies:
   calendar_agenda:
     path: dev_lib/calendar_agenda/
   intl: ^0.18.1
+  flutter_screenutil: ^5.9.0
 
 dependency_overrides: 
   intl: ^0.18.1
