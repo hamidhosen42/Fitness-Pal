@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -28,7 +27,6 @@ class _AddIncomeState extends State<AddIncome> {
     DateTime today = DateTime.now();
     return Scaffold(
       backgroundColor: TColor.primaryColor,
-
       appBar: AppBar(
           backgroundColor: TColor.secondaryColor,
           elevation: 0.0,
@@ -159,9 +157,11 @@ class _AddIncomeState extends State<AddIncome> {
                 ),
               ),
               child: ElevatedButton(
-                onPressed: ()async {
-
-
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(TColor.secondaryColor),
+                ),
+                onPressed: () async {
                   try {
                     final data = FirebaseFirestore.instance
                         .collection("Income")
@@ -176,7 +176,7 @@ class _AddIncomeState extends State<AddIncome> {
                       showTopSnackBar(
                           Overlay.of(context),
                           CustomSnackBar.success(
-                            message: "Expense Added Successfully",
+                            message: "Income Added Successfully",
                           ));
 
                       titleController.clear();

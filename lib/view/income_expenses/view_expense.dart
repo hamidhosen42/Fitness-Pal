@@ -90,7 +90,7 @@ class _ViewExpenseState extends State<ViewExpense> {
             ),
             Expanded(
               child: StreamBuilder(
-                stream: fireStore.collection('Members').snapshots(),
+                stream: fireStore.collection('Expense').snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
