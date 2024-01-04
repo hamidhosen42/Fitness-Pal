@@ -86,6 +86,8 @@ class _MembersScreenState extends State<MembersScreen> {
                 ],
               ),
             ),
+
+
             Expanded(
               child: StreamBuilder(
                 stream: fireStore.collection('Members').snapshots(),
@@ -203,6 +205,10 @@ class _MembersScreenState extends State<MembersScreen> {
                 },
               ),
             ),
+
+
+
+            
             Container(
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(

@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:fitness/view/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -37,10 +36,17 @@ class _EquipmentsScreenState extends State<EquipmentsScreen> {
     return Scaffold(
       backgroundColor: TColor.primaryColor,
       appBar: AppBar(
-        backgroundColor: TColor.secondaryColor,
-        elevation: 0.0,
-        title: const Text('Equipments'),
-      ),
+          backgroundColor: TColor.secondaryColor,
+          elevation: 0.0,
+          title: const Text("Equipments"),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios),
+            iconSize: 28.0,
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          )),
+      
       drawer: AppDrawer(),
       body: SafeArea(
         child: Column(

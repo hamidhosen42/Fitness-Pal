@@ -19,8 +19,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
     MembersScreen(),
     HomeScreen(),
     EquipmentsScreen(),
-    EquipmentsScreen(),
-    // IncExpScreen(),
+    IncExpScreen(),
   ];
 
   int _currentIndex = 2;
