@@ -11,7 +11,7 @@ import '../../common_widget/setting_row.dart';
 import '../../common_widget/title_subtitle_cell.dart';
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 
-import '../Authentication/LoginScreen/login_view.dart';
+import '../authentication/LoginScreen/login_view.dart';
 
 class ProfileView extends StatefulWidget {
   const ProfileView({super.key});

@@ -3,7 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/common/colo_extension.dart';
-import 'package:fitness/view/Authentication/complete_profile_view.dart';
+import 'package:fitness/view/authentication/complete_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';

@@ -1,7 +1,11 @@
 
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 class TColor {
+  static Color get primaryColor => Color(0xFFF1F9FD);
+  static Color get secondaryColor => Color(0xFF473F97);
   static Color get primaryColor1 => const Color(0xff92A3FD);
   static Color get primaryColor2 => const Color(0xff9DCEFF);
 
@@ -16,7 +20,4 @@ class TColor {
   static Color get gray => const Color(0xff786F72);
   static Color get white => Colors.white;
   static Color get lightGray => const Color(0xffF7F8F8);
-
-
-
 }

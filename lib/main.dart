@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'common/colo_extension.dart';
-import 'view/SplashScreen/splash_screen.dart';
+import 'view/dashboard/navigator.dart';
+import 'view/splashScreen/splash_screen.dart';
 
 void main() async{
     WidgetsFlutterBinding.ensureInitialized();
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               primaryColor: TColor.primaryColor1, fontFamily: "Poppins"),
-          home: const SplashScreen(),
+          // home: const SplashScreen(),
+          home: BottomNavBar(),
           // home: const MainTabView(),
         );
       },
