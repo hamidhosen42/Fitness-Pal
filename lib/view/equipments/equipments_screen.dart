@@ -1,40 +1,34 @@
-// ignore_for_file: library_prefixes, use_key_in_widget_constructors, deprecated_member_use, prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, sort_child_properties_last, library_private_types_in_public_api
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, sort_child_properties_last, prefer_const_constructors
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_database/ui/firebase_animated_list.dart';
+import 'package:fitness/view/drawer.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
-import '../../common/colo_extension.dart';
-import '../../common_widget/custom_card_m.dart';
-import '../drawer.dart';
-import 'add_members.dart';
-import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
-class MembersScreen extends StatefulWidget {
+import '../../common/colo_extension.dart';
+import '../../common_widget/custom_card_e.dart';
+import 'add_equipments.dart';
+
+class EquipmentsScreen extends StatefulWidget {
   @override
-  _MembersScreenState createState() => _MembersScreenState();
+  _EquipmentsScreenState createState() => _EquipmentsScreenState();
 }
 
-class _MembersScreenState extends State<MembersScreen> {
-  late DatabaseReference _memberRef;
-  late DatabaseReference _incomeRef;
+class _EquipmentsScreenState extends State<EquipmentsScreen> {
+  late DatabaseReference _equipmentRef;
   late DateTime date;
-  late DateTime today;
-  late String fee;
   final fireStore = FirebaseFirestore.instance;
 
   // @override
   // void initState() {
   //   final FirebaseDatabase database = FirebaseDatabase();
-  //   _memberRef = database
+  //   _equipmentRef = database
   //       .reference()
-  //       .child(FirebaseAuth.instance.currentUser!.uid)
-  //       .child('Members');
-  //   _incomeRef = database
-  //       .reference()
-  //       .child(FirebaseAuth.instance.currentUser!.uid)
-  //       .child('Income');
+  //       .child(FirebaseAuth.instance.currentUser.uid)
+  //       .child('Equipments');
   //   super.initState();
   // }
 
@@ -45,7 +39,7 @@ class _MembersScreenState extends State<MembersScreen> {
       appBar: AppBar(
         backgroundColor: TColor.secondaryColor,
         elevation: 0.0,
-        title: Text('Members'),
+        title: const Text('Equipments'),
       ),
       drawer: AppDrawer(),
       body: SafeArea(
@@ -55,7 +49,7 @@ class _MembersScreenState extends State<MembersScreen> {
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
                 color: TColor.secondaryColor,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   bottomLeft: Radius.circular(40.0),
                   bottomRight: Radius.circular(40.0),
                 ),
@@ -71,14 +65,14 @@ class _MembersScreenState extends State<MembersScreen> {
                       ),
                       child: TextField(
                         onChanged: (value) => {},
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           enabledBorder: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           hintText: 'Search',
                           prefixIcon: Icon(
                             Icons.search,
                           ),
-                          contentPadding: const EdgeInsets.only(top: 15.0),
+                          contentPadding: EdgeInsets.only(top: 15.0),
                         ),
                       ),
                     ),
@@ -88,7 +82,7 @@ class _MembersScreenState extends State<MembersScreen> {
             ),
             Expanded(
               child: StreamBuilder(
-                stream: fireStore.collection('Members').snapshots(),
+                stream: fireStore.collection('Equipments').snapshots(),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
@@ -113,78 +107,49 @@ class _MembersScreenState extends State<MembersScreen> {
                         final data =
                             documents[index].data() as Map<String, dynamic>;
 
-                        return CustomCardM(
-                          name: data['Name'].toString(),
-                          phoneNumber: data['Phone_Number'].toString(),
-                          regdate: data['Reg_Date'].toString(),
-                          paydate: data['Payment_Date'].toString(),
-                          fee: data['Fee'].toString(),
+                        return CustomCardE(
+                          eqname: data['Equipment_Name'].toString(),
+                          category: data['Category'].toString(),
+                          servdate: data['Service_Date'].toString(),
                           imagePath:
-                              'assets/images/baby_child_children_boy-512.png',
+                              'assets/images/dumbbell_gym_fitness_exercise-512.png',
                           func1: () => {
-                            UrlLauncher.launch(
-                                'tel:${data['Phone_Number'].toString()}')
-                          },
-                          func2: () => {
-                            UrlLauncher.launch(
-                                'sms:${data['Phone_Number'].toString()}')
-                          },
-                          func3: () => {
                             Alert(
                               context: context,
                               type: AlertType.warning,
-                              title: "Renew Fee",
+                              title: "Renew Service Date",
                               desc:
-                                  "Are you sure you want to update member's fee?",
+                                  "Are you sure you want to renew service date?",
                               buttons: [
                                 DialogButton(
-                                  child: Text(
+                                  child: const Text(
                                     "Renew",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 20),
                                   ),
                                   onPressed: () {
                                     date = DateTime.parse(
-                                        data['Payment_Date'].toString());
-                                    today = DateTime.now();
+                                        data['Service_Date'].toString());
 
-                                    fee = data['Fee'].toString();
-
-                                    fireStore.collection("Members").doc().set({
-                                      "Payment_Date": DateFormat('yyyy-MM-dd')
+                                    fireStore
+                                        .collection("Equipments")
+                                        .doc()
+                                        .set({
+                                      "Service_Date": DateFormat('yyyy-MM-dd')
                                           .format(
                                             date.add(
-                                              Duration(days: 30),
+                                              Duration(days: 120),
                                             ),
                                           )
                                           .toString()
                                     });
-                                    _incomeRef
-                                        .child(
-                                          DateFormat('yyyy-MM-dd')
-                                              .format(today),
-                                        )
-                                        .push()
-                                        .set(
-                                      {
-                                        'Title':
-                                            '${data['Name'].toString()}\'s Member Fee',
-                                        'Amount': fee,
-                                        'Date': DateFormat('yyyy-MM-dd').format(
-                                          date.add(
-                                            Duration(days: 30),
-                                          ),
-                                        ),
-                                        'Details':
-                                            'Name: ${data['Name'].toString()}\nID: ${""}\nMember\'s Monthly Fee',
-                                      },
-                                    );
+
                                     Navigator.pop(context);
                                   },
-                                  color: Color.fromRGBO(0, 179, 134, 1.0),
+                                  color: const Color.fromRGBO(0, 179, 134, 1.0),
                                 ),
                                 DialogButton(
-                                  child: Text(
+                                  child: const Text(
                                     "Cancel",
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 20),
@@ -195,7 +160,7 @@ class _MembersScreenState extends State<MembersScreen> {
                               ],
                             ).show(),
                           },
-                          func4: () => {_memberRef.child("").remove()},
+                          func2: () => {_equipmentRef.child("").remove()},
                         );
                       },
                     );
@@ -207,7 +172,7 @@ class _MembersScreenState extends State<MembersScreen> {
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 color: TColor.secondaryColor,
-                borderRadius: BorderRadius.only(
+                borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
                 ),
@@ -221,11 +186,11 @@ class _MembersScreenState extends State<MembersScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddMembers(),
+                      builder: (context) => AddEquipments(),
                     ),
                   ),
                 },
-                child: Row(
+                child: const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
                     Icon(
@@ -234,7 +199,7 @@ class _MembersScreenState extends State<MembersScreen> {
                       size: 40.0,
                     ),
                     Text(
-                      'Add Member',
+                      'Add Equipments',
                       style: TextStyle(
                         fontSize: 20,
                         fontWeight: FontWeight.w700,

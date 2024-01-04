@@ -1,7 +1,8 @@
-// ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers, prefer_const_constructors, no_leading_underscores_for_local_identifiers, deprecated_member_use, use_build_context_synchronously, library_private_types_in_public_api
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, avoid_unnecessary_containers, prefer_const_constructors, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
@@ -10,23 +11,19 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../common/colo_extension.dart';
 import '../../common_widget/make_input.dart';
 
-class AddMembers extends StatefulWidget {
+class AddEquipments extends StatefulWidget {
   @override
-  _AddMembersState createState() => _AddMembersState();
+  _AddEquipmentsState createState() => _AddEquipmentsState();
 }
 
-class _AddMembersState extends State<AddMembers> {
+class _AddEquipmentsState extends State<AddEquipments> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
-  final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _phoneController = TextEditingController();
-  final TextEditingController _regdateController = TextEditingController()
-    ..text = 'Please select a Registration Date.';
-  final TextEditingController _wtController = TextEditingController();
-  final TextEditingController _heightController = TextEditingController();
-  final TextEditingController _feeController = TextEditingController();
-
+  final TextEditingController eqnameController = TextEditingController();
+  final TextEditingController categoryController = TextEditingController();
+  final TextEditingController servtermController = TextEditingController();
+  final TextEditingController servdateController = TextEditingController()
+    ..text = 'Please select a Service / Bought Date.';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,7 +31,7 @@ class _AddMembersState extends State<AddMembers> {
       appBar: AppBar(
           backgroundColor: TColor.secondaryColor,
           elevation: 0.0,
-          title: const Text("Add Members"),
+          title: const Text("Add Equipments"),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
             iconSize: 28.0,
@@ -58,7 +55,7 @@ class _AddMembersState extends State<AddMembers> {
                 children: [
                   Flexible(
                     child: Container(
-                      child: const Center(
+                      child: Center(
                         child: Text(
                           'Enter Details',
                           style: TextStyle(
@@ -80,54 +77,39 @@ class _AddMembersState extends State<AddMembers> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       MakeInput(
-                        label: 'Name',
+                        label: 'Equipment Name',
                         obscureText: false,
-                        controllerID: _nameController,
+                        controllerID: eqnameController,
                       ),
                       MakeInput(
-                        label: 'Address',
+                        label: 'Category',
                         obscureText: false,
-                        controllerID: _addressController,
+                        controllerID: categoryController,
                       ),
                       MakeInput(
-                        label: 'Phone Number',
+                        label: 'Service Terms',
                         obscureText: false,
-                        controllerID: _phoneController,
-                      ),
-                      MakeInput(
-                        label: 'Workout Type',
-                        obscureText: false,
-                        controllerID: _wtController,
-                      ),
-                      MakeInput(
-                        label: 'Height',
-                        obscureText: false,
-                        controllerID: _heightController,
-                      ),
-                      MakeInput(
-                        label: 'Fee',
-                        obscureText: false,
-                        controllerID: _feeController,
+                        controllerID: servtermController,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
-                            'Registration Date',
+                          Text(
+                            'Next Service Date / Bought Date',
                             style: TextStyle(
                               fontSize: 15.0,
                               fontWeight: FontWeight.w700,
                               color: Colors.black87,
                             ),
                           ),
-                          const SizedBox(
+                          SizedBox(
                             height: 5.0,
                           ),
                           TextField(
-                            controller: _regdateController,
+                            controller: servdateController,
                             enabled: false,
                             decoration: InputDecoration(
-                              contentPadding: const EdgeInsets.symmetric(
+                              contentPadding: EdgeInsets.symmetric(
                                 vertical: 0.0,
                                 horizontal: 10.0,
                               ),
@@ -144,7 +126,7 @@ class _AddMembersState extends State<AddMembers> {
                             ),
                           ),
                           OutlinedButton(
-                            child: const Text('Pick a Date'),
+                            child: Text('Pick a Date'),
                             onPressed: () {
                               showDatePicker(
                                 context: context,
@@ -153,7 +135,7 @@ class _AddMembersState extends State<AddMembers> {
                                 lastDate: DateTime(2100),
                               ).then((_dateTime) {
                                 setState(() {
-                                  _regdateController.text =
+                                  servdateController.text =
                                       DateFormat('yyyy-MM-dd')
                                           .format(_dateTime!);
                                 });
@@ -171,7 +153,7 @@ class _AddMembersState extends State<AddMembers> {
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
                 color: TColor.secondaryColor,
-                borderRadius: const BorderRadius.only(
+                borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
                 ),
@@ -183,32 +165,26 @@ class _AddMembersState extends State<AddMembers> {
                 ),
                 onPressed: () async {
                   try {
-                    final data =
-                        FirebaseFirestore.instance.collection("Members").doc();
+                    final data = FirebaseFirestore.instance
+                        .collection("Equipments")
+                        .doc();
                     await data.set({
                       'id': data.id.toString(),
-                      'Name': _nameController.text,
-                      'Address': _addressController.text,
-                      'Phone_Number': _phoneController.text,
-                      'Reg_Date': _regdateController.text,
-                      'Payment_Date': _regdateController.text,
-                      'Workout_Type': _wtController.text,
-                      'Height': _heightController.text,
-                      'Fee': _feeController.text,
+                      'Equipment_Name': eqnameController.text,
+                      'Category': categoryController.text,
+                      'Service_Terms': servtermController.text,
+                      'Service_Date': servdateController.text,
                     }).then((value) {
                       showTopSnackBar(
                           Overlay.of(context),
                           CustomSnackBar.success(
-                            message: "Members Added Successfully",
+                            message: "Equipments Added Successfully",
                           ));
 
-                      _nameController.clear();
-                      _addressController.clear();
-                      _phoneController.clear();
-                      _regdateController.clear();
-                      _wtController.clear();
-                      _heightController.clear();
-                      _feeController.clear();
+                      eqnameController.clear();
+                      categoryController.clear();
+                      servtermController.clear();
+                      servdateController.clear();
                     });
                   } catch (e) {
                     showTopSnackBar(
@@ -219,9 +195,9 @@ class _AddMembersState extends State<AddMembers> {
                     );
                   }
                 },
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
+                  children: const <Widget>[
                     Icon(
                       Icons.add_circle_outline,
                       color: Colors.white,

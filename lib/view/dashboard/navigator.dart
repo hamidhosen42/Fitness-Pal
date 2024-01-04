@@ -1,8 +1,10 @@
-// ignore_for_file: use_key_in_widget_constructors
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 
+import '../equipments/equipments_screen.dart';
 import '../home/home_screen_g.dart';
+import '../income_expenses/inc_exp_screen.dart';
 import '../members/members_screen.dart';
 import '../trainers/trainers_screen.dart';
 
@@ -16,9 +18,8 @@ class _BottomNavBarState extends State<BottomNavBar> {
     TrainersScreen(),
     MembersScreen(),
     HomeScreen(),
-    HomeScreen(),
-    HomeScreen(),
-    // EquipmentsScreen(),
+    EquipmentsScreen(),
+    EquipmentsScreen(),
     // IncExpScreen(),
   ];
 
