@@ -44,7 +44,7 @@ dependencies:
   readmore: ^2.1.0
   calendar_agenda:
     path: dev_lib/calendar_agenda/
-  intl: ^0.18.1
+  intl: 
   flutter_screenutil: ^5.9.0
   firebase_core: ^2.20.0
   firebase_auth: ^4.12.0
@@ -53,6 +53,11 @@ dependencies:
   top_snackbar_flutter: ^3.1.0
   firebase_storage: ^11.4.1
   firebase_database: 
+  provider: 
+  rflutter_alert: 
+  simple_animations: 
+  bubble_tab_indicator: 
+  url_launcher: 
 
 dependency_overrides: 
   intl: ^0.18.1

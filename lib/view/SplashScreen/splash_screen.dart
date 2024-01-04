@@ -4,6 +4,7 @@ import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../dashboard/navigator.dart';
 import '../main_tab/main_tab_view.dart';
 import '../on_boarding/started_view.dart';
 
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
           } else {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => const MainTabView()),
+                MaterialPageRoute(builder: (_) => BottomNavBar()),
                 (route) => false);
           }
         });

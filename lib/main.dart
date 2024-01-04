@@ -27,9 +27,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
               primaryColor: TColor.primaryColor1, fontFamily: "Poppins"),
-          // home: const SplashScreen(),
-          home: BottomNavBar(),
-          // home: const MainTabView(),
+          // home: BottomNavBar(),
+          home: const SplashScreen(),
         );
       },
     );
