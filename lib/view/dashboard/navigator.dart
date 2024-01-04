@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 
 import '../home/home_screen_g.dart';
+import '../members/members_screen.dart';
 import '../trainers/trainers_screen.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -13,8 +14,7 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   final List _screens = [
     TrainersScreen(),
-    // MembersScreen(),
-    HomeScreen(),
+    MembersScreen(),
     HomeScreen(),
     HomeScreen(),
     HomeScreen(),
