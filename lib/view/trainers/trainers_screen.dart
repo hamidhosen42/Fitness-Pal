@@ -92,6 +92,8 @@ class _TrainersScreenState extends State<TrainersScreen> {
                 ],
               ),
             ),
+
+
             Expanded(
               child: StreamBuilder(
                 stream: fireStore.collection('Trainers').snapshots(),
@@ -199,7 +201,7 @@ class _TrainersScreenState extends State<TrainersScreen> {
                               ],
                             ).show(),
                           },
-                          func4: () => {_trainerRef.child("sd").remove()},
+                          func4: () => {_trainerRef.child("").remove()},
                         );
                       },
                     );

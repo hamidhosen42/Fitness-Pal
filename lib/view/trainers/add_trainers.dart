@@ -178,6 +178,8 @@ class _AddTrainersState extends State<AddTrainers> {
                 ),
                 onPressed: () async {
                   try {
+
+                    
                     final data = FirebaseFirestore.instance
                         .collection("Trainers")
                         .doc();

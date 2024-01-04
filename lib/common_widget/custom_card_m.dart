@@ -1,32 +1,37 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors_in_immutables, prefer_const_constructors, library_private_types_in_public_api
+//Custom Card For Members
+
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
 
 import 'package:flutter/material.dart';
 
-class CustomCardT extends StatefulWidget {
+class CustomCardM extends StatefulWidget {
   final String? name;
   final String? phoneNumber;
+  final String? regdate;
   final String? paydate;
-  final String? salary;
+  final String? fee;
   final String? imagePath;
   final Function? func1;
   final Function? func2;
   final Function? func3;
   final Function? func4;
-  CustomCardT(
+
+  CustomCardM(
       {this.name,
       this.phoneNumber,
+      this.regdate,
       this.paydate,
-      this.salary,
+      this.fee,
       this.imagePath,
       this.func1,
       this.func2,
-      this.func3,
+  this.func3,
       this.func4});
   @override
-  _CustomCardTState createState() => _CustomCardTState();
+  _CustomCardMState createState() => _CustomCardMState();
 }
 
-class _CustomCardTState extends State<CustomCardT> {
+class _CustomCardMState extends State<CustomCardM> {
   late DateTime date;
   late Color timeColor;
   @override
@@ -80,7 +85,7 @@ class _CustomCardTState extends State<CustomCardT> {
                         fontSize: 15.0),
                   ),
                   Text(
-                    'Salary: Rs. ${widget.salary}',
+                    'Fee: Rs. ${widget.fee}',
                     style: TextStyle(
                         color: Colors.black,
                         fontWeight: FontWeight.w400,
@@ -108,8 +113,8 @@ class _CustomCardTState extends State<CustomCardT> {
                       Icons.call,
                       color: Colors.teal,
                     ),
-                    tooltip: 'Call Trainer',
-                    onPressed: () => widget.func1,
+                    tooltip: 'Call Member',
+                    onPressed:() =>  widget.func1,
                   ),
                   Text(
                     'Call',
@@ -126,8 +131,8 @@ class _CustomCardTState extends State<CustomCardT> {
                       Icons.message,
                       color: Colors.teal,
                     ),
-                    tooltip: 'Message Trainer',
-                    onPressed: () => widget.func2,
+                    tooltip: 'Message Member',
+                    onPressed:() =>  widget.func2,
                   ),
                   Text(
                     'Message',
@@ -144,11 +149,11 @@ class _CustomCardTState extends State<CustomCardT> {
                       Icons.money,
                       color: Colors.teal,
                     ),
-                    tooltip: 'Pay Salary',
+                    tooltip: 'Renew Fees',
                     onPressed: () => widget.func3,
                   ),
                   Text(
-                    'Pay',
+                    'Renew',
                     style: TextStyle(
                       color: Colors.teal,
                     ),
@@ -162,7 +167,7 @@ class _CustomCardTState extends State<CustomCardT> {
                       Icons.delete,
                       color: Colors.red,
                     ),
-                    tooltip: 'Delete Trainer',
+                    tooltip: 'Delete Member',
                     onPressed: () => widget.func4,
                   ),
                   Text(

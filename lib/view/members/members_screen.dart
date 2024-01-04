@@ -1,13 +1,13 @@
-import 'package:firebase_auth/firebase_auth.dart';
+// ignore_for_file: library_prefixes, use_key_in_widget_constructors, deprecated_member_use, prefer_const_constructors, unnecessary_new, prefer_const_literals_to_create_immutables, sort_child_properties_last
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
-import 'package:firebase_database/ui/firebase_animated_list.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:my_gym_manager/config/palette.dart';
-import 'package:my_gym_manager/screens/drawer.dart';
-import 'package:my_gym_manager/widgets/custom_app_bar.dart';
-import 'package:my_gym_manager/widgets/custom_card_m.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
+import '../../common/colo_extension.dart';
+import '../../common_widget/custom_card_m.dart';
+import '../drawer.dart';
 import 'add_members.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
@@ -17,30 +17,36 @@ class MembersScreen extends StatefulWidget {
 }
 
 class _MembersScreenState extends State<MembersScreen> {
-  DatabaseReference _memberRef;
-  DatabaseReference _incomeRef;
-  DateTime date;
-  DateTime today;
-  String fee;
-  @override
-  void initState() {
-    final FirebaseDatabase database = FirebaseDatabase();
-    _memberRef = database
-        .reference()
-        .child(FirebaseAuth.instance.currentUser.uid)
-        .child('Members');
-    _incomeRef = database
-        .reference()
-        .child(FirebaseAuth.instance.currentUser.uid)
-        .child('Income');
-    super.initState();
-  }
+  late DatabaseReference _memberRef;
+  late DatabaseReference _incomeRef;
+  late DateTime date;
+  late DateTime today;
+  late String fee;
+  final fireStore = FirebaseFirestore.instance;
+
+  // @override
+  // void initState() {
+  //   final FirebaseDatabase database = FirebaseDatabase();
+  //   _memberRef = database
+  //       .reference()
+  //       .child(FirebaseAuth.instance.currentUser!.uid)
+  //       .child('Members');
+  //   _incomeRef = database
+  //       .reference()
+  //       .child(FirebaseAuth.instance.currentUser!.uid)
+  //       .child('Income');
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Palette.primaryColor,
-      appBar: CustomAppBar('Members'),
+      backgroundColor: TColor.primaryColor,
+      appBar: AppBar(
+        backgroundColor: TColor.secondaryColor,
+        elevation: 0.0,
+        title: Text('Members'),
+      ),
       drawer: AppDrawer(),
       body: SafeArea(
         child: Column(
@@ -48,7 +54,7 @@ class _MembersScreenState extends State<MembersScreen> {
             Container(
               padding: const EdgeInsets.all(20.0),
               decoration: BoxDecoration(
-                color: Palette.secondaryColor,
+                color: TColor.secondaryColor,
                 borderRadius: BorderRadius.only(
                   bottomLeft: Radius.circular(40.0),
                   bottomRight: Radius.circular(40.0),
@@ -81,34 +87,47 @@ class _MembersScreenState extends State<MembersScreen> {
               ),
             ),
             Expanded(
-              child: Column(
-                children: [
-                  Flexible(
-                    child: new FirebaseAnimatedList(
-                      shrinkWrap: true,
-                      query: _memberRef,
-                      itemBuilder: (
-                        BuildContext context,
-                        DataSnapshot snapshot,
-                        Animation<double> animation,
-                        int index,
-                      ) {
+              child: StreamBuilder(
+                stream: fireStore.collection('Members').snapshots(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(
+                      child: CircularProgressIndicator(color: Colors.black),
+                    );
+                  } else if (snapshot.hasError) {
+                    return Text('Error: ${snapshot.error}');
+                  } else {
+                    final List<DocumentSnapshot> documents =
+                        snapshot.data!.docs;
+
+                    // Check if there are no documents
+                    if (documents.isEmpty) {
+                      return const Center(
+                        child: Text('No trainers available.'),
+                      );
+                    }
+
+                    return ListView.builder(
+                      itemCount: documents.length,
+                      itemBuilder: (context, index) {
+                        final data =
+                            documents[index].data() as Map<String, dynamic>;
+
                         return CustomCardM(
-                          name: snapshot.value['Name'].toString(),
-                          phoneNumber:
-                              snapshot.value['Phone_Number'].toString(),
-                          regdate: snapshot.value['Reg_Date'].toString(),
-                          paydate: snapshot.value['Payment_Date'].toString(),
-                          fee: snapshot.value['Fee'].toString(),
+                          name: data['Name'].toString(),
+                          phoneNumber: data['Phone_Number'].toString(),
+                          regdate: data['Reg_Date'].toString(),
+                          paydate: data['Payment_Date'].toString(),
+                          fee: data['Fee'].toString(),
                           imagePath:
                               'assets/images/baby_child_children_boy-512.png',
                           func1: () => {
                             UrlLauncher.launch(
-                                'tel:${snapshot.value['Phone_Number'].toString()}')
+                                'tel:${data['Phone_Number'].toString()}')
                           },
                           func2: () => {
                             UrlLauncher.launch(
-                                'sms:${snapshot.value['Phone_Number'].toString()}')
+                                'sms:${data['Phone_Number'].toString()}')
                           },
                           func3: () => {
                             Alert(
@@ -125,21 +144,21 @@ class _MembersScreenState extends State<MembersScreen> {
                                         color: Colors.white, fontSize: 20),
                                   ),
                                   onPressed: () {
-                                    date = DateTime.parse(snapshot
-                                        .value['Payment_Date']
-                                        .toString());
+                                    date = DateTime.parse(
+                                        data['Payment_Date'].toString());
                                     today = DateTime.now();
-                                    fee = snapshot.value['Fee'].toString();
-                                    _memberRef
-                                        .child(snapshot.key)
-                                        .child('Payment_Date')
-                                        .set(DateFormat('yyyy-MM-dd')
-                                            .format(
-                                              date.add(
-                                                Duration(days: 30),
-                                              ),
-                                            )
-                                            .toString());
+
+                                    fee = data['Fee'].toString();
+
+                                    fireStore.collection("Members").doc().set({
+                                      "Payment_Date": DateFormat('yyyy-MM-dd')
+                                          .format(
+                                            date.add(
+                                              Duration(days: 30),
+                                            ),
+                                          )
+                                          .toString()
+                                    });
                                     _incomeRef
                                         .child(
                                           DateFormat('yyyy-MM-dd')
@@ -149,7 +168,7 @@ class _MembersScreenState extends State<MembersScreen> {
                                         .set(
                                       {
                                         'Title':
-                                            '${snapshot.value['Name'].toString()}\'s Member Fee',
+                                            '${data['Name'].toString()}\'s Member Fee',
                                         'Amount': fee,
                                         'Date': DateFormat('yyyy-MM-dd').format(
                                           date.add(
@@ -157,7 +176,7 @@ class _MembersScreenState extends State<MembersScreen> {
                                           ),
                                         ),
                                         'Details':
-                                            'Name: ${snapshot.value['Name'].toString()}\nID: ${snapshot.key}\nMember\'s Monthly Fee',
+                                            'Name: ${data['Name'].toString()}\nID: ${""}\nMember\'s Monthly Fee',
                                       },
                                     );
                                     Navigator.pop(context);
@@ -176,25 +195,28 @@ class _MembersScreenState extends State<MembersScreen> {
                               ],
                             ).show(),
                           },
-                          func4: () =>
-                              {_memberRef.child(snapshot.key).remove()},
+                          func4: () => {_memberRef.child("").remove()},
                         );
                       },
-                    ),
-                  ),
-                ],
+                    );
+                  }
+                },
               ),
             ),
             Container(
               padding: const EdgeInsets.all(10.0),
               decoration: BoxDecoration(
-                color: Palette.secondaryColor,
+                color: TColor.secondaryColor,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(40.0),
                   topRight: Radius.circular(40.0),
                 ),
               ),
-              child: FlatButton(
+              child: ElevatedButton(
+                style: ButtonStyle(
+                  backgroundColor:
+                      MaterialStateProperty.all(TColor.secondaryColor),
+                ),
                 onPressed: () => {
                   Navigator.push(
                     context,

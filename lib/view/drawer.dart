@@ -3,8 +3,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../common/colo_extension.dart';
+import 'authentication/LoginScreen/login_view.dart';
 
 class AppDrawer extends StatefulWidget {
   @override
@@ -171,7 +173,11 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
                 tooltip: 'Log Out of the App',
                 onPressed: () => {
-                  // context.read<AuthenticationService>().signOut(),
+                  FirebaseAuth.instance.signOut(),
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (_) => LoginView()),
+                        (route) => false)
                 },
               ),
               Text(

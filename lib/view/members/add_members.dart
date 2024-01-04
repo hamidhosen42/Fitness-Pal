@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers, prefer_const_constructors, no_leading_underscores_for_local_identifiers, use_build_context_synchronously, library_private_types_in_public_api
+// ignore_for_file: use_key_in_widget_constructors, avoid_unnecessary_containers, prefer_const_constructors, no_leading_underscores_for_local_identifiers, deprecated_member_use, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -17,16 +17,16 @@ class AddMembers extends StatefulWidget {
 }
 
 class _AddMembersState extends State<AddMembers> {
-  final referenceDatabase = FirebaseDatabase.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
-  final TextEditingController nameController = TextEditingController();
-  final TextEditingController addressController = TextEditingController();
-  final TextEditingController phoneController = TextEditingController();
-  final TextEditingController regdateController = TextEditingController()
+
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _regdateController = TextEditingController()
     ..text = 'Please select a Registration Date.';
-  final TextEditingController wtController = TextEditingController();
-  final TextEditingController heightController = TextEditingController();
-  final TextEditingController feeController = TextEditingController();
+  final TextEditingController _wtController = TextEditingController();
+  final TextEditingController _heightController = TextEditingController();
+  final TextEditingController _feeController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -83,32 +83,32 @@ class _AddMembersState extends State<AddMembers> {
                       MakeInput(
                         label: 'Name',
                         obscureText: false,
-                        controllerID: nameController,
+                        controllerID: _nameController,
                       ),
                       MakeInput(
                         label: 'Address',
                         obscureText: false,
-                        controllerID: addressController,
+                        controllerID: _addressController,
                       ),
                       MakeInput(
                         label: 'Phone Number',
                         obscureText: false,
-                        controllerID: phoneController,
+                        controllerID: _phoneController,
                       ),
                       MakeInput(
                         label: 'Workout Type',
                         obscureText: false,
-                        controllerID: wtController,
+                        controllerID: _wtController,
                       ),
                       MakeInput(
                         label: 'Height',
                         obscureText: false,
-                        controllerID: heightController,
+                        controllerID: _heightController,
                       ),
                       MakeInput(
                         label: 'Fee',
                         obscureText: false,
-                        controllerID: feeController,
+                        controllerID: _feeController,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -125,7 +125,7 @@ class _AddMembersState extends State<AddMembers> {
                             height: 5.0,
                           ),
                           TextField(
-                            controller: regdateController,
+                            controller: _regdateController,
                             enabled: false,
                             decoration: InputDecoration(
                               contentPadding: const EdgeInsets.symmetric(
@@ -154,7 +154,7 @@ class _AddMembersState extends State<AddMembers> {
                                 lastDate: DateTime(2100),
                               ).then((_dateTime) {
                                 setState(() {
-                                  regdateController.text =
+                                  _regdateController.text =
                                       DateFormat('yyyy-MM-dd')
                                           .format(_dateTime!);
                                 });
@@ -188,14 +188,14 @@ class _AddMembersState extends State<AddMembers> {
                         FirebaseFirestore.instance.collection("Members").doc();
                     await data.set({
                       'id': data.id.toString(),
-                      'Name': nameController.text,
-                      'Address': addressController.text,
-                      'Phone_Number': phoneController.text,
-                      'Reg_Date': regdateController.text,
-                      'Payment_Date': regdateController.text,
-                      'Workout_Type': wtController.text,
-                      'Height': heightController.text,
-                      'Fee': feeController.text,
+                      'Name': _nameController.text,
+                      'Address': _addressController.text,
+                      'Phone_Number': _phoneController.text,
+                      'Reg_Date': _regdateController.text,
+                      'Payment_Date': _regdateController.text,
+                      'Workout_Type': _wtController.text,
+                      'Height': _heightController.text,
+                      'Fee': _feeController.text,
                     }).then((value) {
                       showTopSnackBar(
                           Overlay.of(context),
@@ -203,13 +203,13 @@ class _AddMembersState extends State<AddMembers> {
                             message: "Members Added Successfully",
                           ));
 
-                      nameController.clear();
-                      addressController.clear();
-                      phoneController.clear();
-                      regdateController.clear();
-                      wtController.clear();
-                      heightController.clear();
-                      feeController.clear();
+                      _nameController.clear();
+                      _addressController.clear();
+                      _phoneController.clear();
+                      _regdateController.clear();
+                      _wtController.clear();
+                      _heightController.clear();
+                      _feeController.clear();
                     });
                   } catch (e) {
                     showTopSnackBar(
