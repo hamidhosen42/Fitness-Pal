@@ -166,7 +166,7 @@ class _EquipmentsScreenState extends State<EquipmentsScreen> {
                               ],
                             ).show(),
                           },
-                          func2: () => {_equipmentRef.child("").remove()},
+                          func2: () => {fireStore.collection('Equipments').doc(data['id']).delete()},
                         );
                       },
                     );

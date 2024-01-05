@@ -165,7 +165,7 @@ class _ViewExpenseState extends State<ViewExpense> {
                               ],
                             ).show(),
                           },
-                          func2: () => {_expenseRef.child("").remove()},
+                          func2: () => {fireStore.collection('Expense').doc(data['id']).delete()},
                         );
                       },
                     );

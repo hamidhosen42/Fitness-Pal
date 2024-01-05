@@ -197,7 +197,7 @@ class _MembersScreenState extends State<MembersScreen> {
                               ],
                             ).show(),
                           },
-                          func4: () => {_memberRef.child("").remove()},
+                          func4: () => {fireStore.collection("Members").doc(data['id']).delete()},
                         );
                       },
                     );

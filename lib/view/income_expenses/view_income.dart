@@ -162,7 +162,7 @@ class _ViewIncomeState extends State<ViewIncome> {
                               ],
                             ).show(),
                           },
-                          func2: () => {_incomeRef.child("").remove()},
+                          func2: () => {fireStore.collection('Income').doc(data['id']).delete()},
                         );
                       },
                     );

@@ -8,8 +8,8 @@ class CustomCardMoney extends StatefulWidget {
   final String? detail;
   final String? date;
   final String? imagePath;
-  final Function? func1;
-  final Function? func2;
+  final void Function()? func1;
+  final void Function()? func2;
 
   CustomCardMoney({
     this.title,
@@ -86,53 +86,11 @@ class _CustomCardMoneyState extends State<CustomCardMoney> {
                     color: Colors.red,
                   ),
                   tooltip: 'Delete Equipment',
-                  onPressed: () => widget.func2,
+                  onPressed: widget.func2,
                 ),
               ),
             ],
           ),
-          // Divider(color: Colors.black),
-          // Row(
-          //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          //   children: [
-          //     Column(
-          //       children: [
-          //         IconButton(
-          //           icon: Icon(
-          //             Icons.money,
-          //             color: Colors.teal,
-          //           ),
-          //           tooltip: 'Service Equipment',
-          //           onPressed: widget.func1,
-          //         ),
-          //         Text(
-          //           'Service',
-          //           style: TextStyle(
-          //             color: Colors.teal,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //     Column(
-          //       children: [
-          //         IconButton(
-          //           icon: Icon(
-          //             Icons.delete,
-          //             color: Colors.red,
-          //           ),
-          //           tooltip: 'Delete Equipment',
-          //           onPressed: widget.func2,
-          //         ),
-          //         Text(
-          //           'Delete',
-          //           style: TextStyle(
-          //             color: Colors.red,
-          //           ),
-          //         ),
-          //       ],
-          //     ),
-          //   ],
-          // ),
         ],
       ),
     );

@@ -165,7 +165,7 @@ class _AddIncomeState extends State<AddIncome> {
                   try {
                     final data = FirebaseFirestore.instance
                         .collection("Income")
-                        .doc(DateFormat('yyyy-MM-dd').format(today));
+                        .doc();
                     await data.set({
                       'id': data.id.toString(),
                       'Title': titleController.text,

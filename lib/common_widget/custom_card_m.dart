@@ -1,6 +1,6 @@
 //Custom Card For Members
 
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_constructors_in_immutables, library_private_types_in_public_api
 
 import 'package:flutter/material.dart';
 
@@ -11,10 +11,10 @@ class CustomCardM extends StatefulWidget {
   final String? paydate;
   final String? fee;
   final String? imagePath;
-  final Function? func1;
-  final Function? func2;
-  final Function? func3;
-  final Function? func4;
+  final void Function()? func1;
+  final void Function()? func2;
+  final void Function()? func3;
+  final void Function()? func4;
 
   CustomCardM(
       {this.name,
@@ -114,7 +114,7 @@ class _CustomCardMState extends State<CustomCardM> {
                       color: Colors.teal,
                     ),
                     tooltip: 'Call Member',
-                    onPressed:() =>  widget.func1,
+                    onPressed:widget.func1,
                   ),
                   Text(
                     'Call',
@@ -132,7 +132,7 @@ class _CustomCardMState extends State<CustomCardM> {
                       color: Colors.teal,
                     ),
                     tooltip: 'Message Member',
-                    onPressed:() =>  widget.func2,
+                    onPressed: widget.func2,
                   ),
                   Text(
                     'Message',
@@ -150,7 +150,7 @@ class _CustomCardMState extends State<CustomCardM> {
                       color: Colors.teal,
                     ),
                     tooltip: 'Renew Fees',
-                    onPressed: () => widget.func3,
+                    onPressed:  widget.func3,
                   ),
                   Text(
                     'Renew',
@@ -168,7 +168,7 @@ class _CustomCardMState extends State<CustomCardM> {
                       color: Colors.red,
                     ),
                     tooltip: 'Delete Member',
-                    onPressed: () => widget.func4,
+                    onPressed:  widget.func4,
                   ),
                   Text(
                     'Delete',

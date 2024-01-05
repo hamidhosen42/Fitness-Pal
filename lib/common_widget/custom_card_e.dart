@@ -7,8 +7,8 @@ class CustomCardE extends StatefulWidget {
   final String? category;
   final String? servdate;
   final String? imagePath;
-  final Function? func1;
-  final Function? func2;
+  final void Function()? func1;
+  final void Function()? func2;
 
   CustomCardE({
     this.eqname,
@@ -77,7 +77,7 @@ class _CustomCardEState extends State<CustomCardE> {
                     color: Colors.red,
                   ),
                   tooltip: 'Delete Equipment',
-                  onPressed:()=> widget.func2,
+                  onPressed:widget.func2,
                 ),
               ),
             ],

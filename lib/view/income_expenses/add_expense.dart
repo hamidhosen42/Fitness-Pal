@@ -166,7 +166,7 @@ class _AddExpenseState extends State<AddExpense> {
                   try {
                     final data = FirebaseFirestore.instance
                         .collection("Expense")
-                        .doc(DateFormat('yyyy-MM-dd').format(today));
+                        .doc();
                     await data.set({
                       'id': data.id.toString(),
                       'Title': titleController.text,

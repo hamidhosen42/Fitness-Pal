@@ -125,7 +125,7 @@ class _TrainersScreenState extends State<TrainersScreen> {
                           name: data['Name'],
                           phoneNumber: data['Phone_Number'],
                           paydate: data['Pay_Date'],
-                          salary: data['salary'],
+                          salary: data['Salary'],
                           imagePath:
                               'assets/images/baby_child_children_boy-512.png',
                           func1: () => {
@@ -153,10 +153,11 @@ class _TrainersScreenState extends State<TrainersScreen> {
                                   onPressed: () {
                                     date = DateTime.parse(
                                         data['Pay_Date'].toString());
+
                                     today = DateTime.now();
                                     salary = data['Salary'].toString();
 
-                                    fireStore.collection('Trainers').doc().set({
+                                    fireStore.collection('Trainers').doc(data['id']).update({
                                       "Pay_Date": DateFormat('yyyy-MM-dd')
                                           .format(
                                             date.add(
@@ -165,26 +166,26 @@ class _TrainersScreenState extends State<TrainersScreen> {
                                           )
                                           .toString()
                                     });
-                                    _expenseRef
-                                        .child(
-                                          DateFormat('yyyy-MM-dd')
-                                              .format(today),
-                                        )
-                                        .push()
-                                        .set(
-                                      {
-                                        'Title':
-                                            '${data['Name'].toString()}\'s Trainer Fee',
-                                        'Amount': salary,
-                                        'Date': DateFormat('yyyy-MM-dd').format(
-                                          date.add(
-                                            Duration(days: 30),
-                                          ),
-                                        ),
-                                        'Details':
-                                            'Name: ${data['Name'].toString()}\nID: ${""}\nTrainer\'s Monthly Fee',
-                                      },
-                                    );
+                                    // _expenseRef
+                                    //     .child(
+                                    //       DateFormat('yyyy-MM-dd')
+                                    //           .format(today),
+                                    //     )
+                                    //     .push()
+                                    //     .set(
+                                    //   {
+                                    //     'Title':
+                                    //         '${data['Name'].toString()}\'s Trainer Fee',
+                                    //     'Amount': salary,
+                                    //     'Date': DateFormat('yyyy-MM-dd').format(
+                                    //       date.add(
+                                    //         Duration(days: 30),
+                                    //       ),
+                                    //     ),
+                                    //     'Details':
+                                    //         'Name: ${data['Name'].toString()}\nID: ${""}\nTrainer\'s Monthly Fee',
+                                    //   },
+                                    // );
                                     Navigator.pop(context);
                                   },
                                   color: Color.fromRGBO(0, 179, 134, 1.0),
@@ -201,7 +202,7 @@ class _TrainersScreenState extends State<TrainersScreen> {
                               ],
                             ).show(),
                           },
-                          func4: () => {_trainerRef.child("").remove()},
+                          func4: () => {fireStore.collection("Trainers").doc(data['id']).delete()},
                         );
                       },
                     );

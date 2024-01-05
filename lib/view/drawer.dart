@@ -1,11 +1,13 @@
-// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, deprecated_member_use, prefer_const_constructors, unnecessary_new
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, deprecated_member_use, prefer_const_constructors, unnecessary_new, sized_box_for_whitespace
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../common/colo_extension.dart';
+import '../common_widget/custom_darwer_grid.dart';
 import 'authentication/LoginScreen/login_view.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -14,27 +16,16 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  final referenceDatabase = FirebaseDatabase.instance;
   final FirebaseAuth auth = FirebaseAuth.instance;
+
   final TextEditingController nameController = TextEditingController();
   final TextEditingController gymnameController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-  late DatabaseReference _detailRef;
 
-
-  @override
-  void initState() {
-    final FirebaseDatabase database = FirebaseDatabase();
-    _detailRef = database
-        .reference()
-        .child(FirebaseAuth.instance.currentUser!.uid)
-        .child('Details');
-    super.initState();
-  }
+  final fireStore = FirebaseFirestore.instance;
 
   @override
   Widget build(BuildContext context) {
-    final ref = referenceDatabase.reference();
     return Container(
       width: 250.0,
       child: Drawer(
@@ -62,26 +53,30 @@ class _AppDrawerState extends State<AppDrawer> {
               Expanded(
                 child: Column(
                   children: [
-                    // Flexible(
-                    //   child: new FirebaseAnimatedList(
-                    //       shrinkWrap: true,
-                    //       query: _detailRef,
-                    //       itemBuilder: (
-                    //         BuildContext context,
-                    //         DataSnapshot snapshot,
-                    //         Animation<double> animation,
-                    //         int index,
-                    //       ) 
-                    //       {
-                    //         return CustomDG(
-                    //           name: snapshot.value['Name'].toString(),
-                    //           gymname: snapshot.value['GYM_Name'].toString(),
-                    //           description:
-                    //               snapshot.value['Description'].toString(),
-                    //         );
-                    //       }
-                    //       ),
-                    // ),
+                    StreamBuilder(
+                        stream: fireStore
+                            .collection("users")
+                            .doc(FirebaseAuth.instance.currentUser!.email)
+                            .snapshots(),
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const Center(
+                              child: CircularProgressIndicator(
+                                  color: Colors.black),
+                            );
+                          } else if (snapshot.hasError) {
+                            return Text('Error: ${snapshot.error}');
+                          } else {
+                            final data = snapshot.data;
+
+                            return CustomDG(
+                              name: data!['f_name'].toString(),
+                              gymname: data['f_name'].toString(),
+                              description: data['f_name'].toString(),
+                            );
+                          }
+                        }),
                   ],
                 ),
               ),
@@ -103,60 +98,60 @@ class _AppDrawerState extends State<AppDrawer> {
                     color: Colors.white,
                   ),
                   onPressed: () => {
-                        // Alert(
-                        //     context: context,
-                        //     title: "DETAILS",
-                        //     content: Column(
-                        //       children: <Widget>[
-                        //         TextField(
-                        //           decoration: InputDecoration(
-                        //             icon: Icon(Icons.person),
-                        //             labelText: 'Your name',
-                        //           ),
-                        //           controller: nameController,
-                        //         ),
-                        //         TextField(
-                        //           decoration: InputDecoration(
-                        //             icon: Icon(Icons.home_rounded),
-                        //             labelText: 'GYM name',
-                        //           ),
-                        //           controller: gymnameController,
-                        //         ),
-                        //         TextField(
-                        //           decoration: InputDecoration(
-                        //             icon: Icon(Icons.info),
-                        //             labelText: 'Description',
-                        //           ),
-                        //           controller: descriptionController,
-                        //         ),
-                        //       ],
-                        //     ),
-                        //     buttons: [
-                        //       // DialogButton(
-                        //       //   color: Palette.secondaryColor,
-                        //       //   onPressed: () => {
-                        //       //     ref
-                        //       //         .child(auth.currentUser.uid)
-                        //       //         .child('Details')
-                        //       //         .child('1')
-                        //       //         .set(
-                        //       //       {
-                        //       //         'Name': nameController.text,
-                        //       //         'GYM_Name': gymnameController.text,
-                        //       //         'Description': descriptionController.text,
-                        //       //       },
-                        //       //     ).asStream(),
-                        //       //     nameController.clear(),
-                        //       //     gymnameController.clear(),
-                        //       //     descriptionController.clear(),
-                        //       //   },
-                        //       //   child: Text(
-                        //       //     'UPDATE',
-                        //       //     style: TextStyle(
-                        //       //         color: Colors.white, fontSize: 20),
-                        //       //   ),
-                        //       // )
-                        //     ]).show()
+                        Alert(
+                            context: context,
+                            title: "DETAILS",
+                            content: Column(
+                              children: <Widget>[
+                                TextField(
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.person),
+                                    labelText: 'Your F-Name',
+                                  ),
+                                  controller: nameController,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.home_rounded),
+                                    labelText: 'Your L-name',
+                                  ),
+                                  controller: gymnameController,
+                                ),
+                                TextField(
+                                  decoration: InputDecoration(
+                                    icon: Icon(Icons.info),
+                                    labelText: 'Description',
+                                  ),
+                                  controller: descriptionController,
+                                ),
+                              ],
+                            ),
+                            buttons: [
+                              DialogButton(
+                                color: TColor.secondaryColor,
+                                onPressed: () => {
+                                  fireStore
+                                      .collection('users')
+                                      .doc(FirebaseAuth
+                                          .instance.currentUser!.email)
+                                      .update(
+                                    {
+                                      'f_name': nameController.text,
+                                      'l_name': gymnameController.text,
+                                    },
+                                  ).asStream(),
+                                  nameController.clear(),
+                                  gymnameController.clear(),
+                                  descriptionController.clear(),
+                                   Navigator.pop(context)
+                                },
+                                child: Text(
+                                  'UPDATE',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 20),
+                                ),
+                              )
+                            ]).show()
                       }),
               Text(
                 'Settings',
@@ -174,10 +169,10 @@ class _AppDrawerState extends State<AppDrawer> {
                 tooltip: 'Log Out of the App',
                 onPressed: () => {
                   FirebaseAuth.instance.signOut(),
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(builder: (_) => LoginView()),
-                        (route) => false)
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (_) => LoginView()),
+                      (route) => false)
                 },
               ),
               Text(

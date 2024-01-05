@@ -8,10 +8,10 @@ class CustomCardT extends StatefulWidget {
   final String? paydate;
   final String? salary;
   final String? imagePath;
-  final Function? func1;
-  final Function? func2;
-  final Function? func3;
-  final Function? func4;
+  final void Function()? func1;
+  final void Function()? func2;
+  final void Function()? func3;
+  final void Function()? func4;
   CustomCardT(
       {this.name,
       this.phoneNumber,
@@ -109,7 +109,7 @@ class _CustomCardTState extends State<CustomCardT> {
                       color: Colors.teal,
                     ),
                     tooltip: 'Call Trainer',
-                    onPressed: () => widget.func1,
+                    onPressed: widget.func1,
                   ),
                   Text(
                     'Call',
@@ -127,7 +127,7 @@ class _CustomCardTState extends State<CustomCardT> {
                       color: Colors.teal,
                     ),
                     tooltip: 'Message Trainer',
-                    onPressed: () => widget.func2,
+                    onPressed: widget.func2,
                   ),
                   Text(
                     'Message',
@@ -145,7 +145,7 @@ class _CustomCardTState extends State<CustomCardT> {
                       color: Colors.teal,
                     ),
                     tooltip: 'Pay Salary',
-                    onPressed: () => widget.func3,
+                    onPressed: widget.func3,
                   ),
                   Text(
                     'Pay',
@@ -163,7 +163,7 @@ class _CustomCardTState extends State<CustomCardT> {
                       color: Colors.red,
                     ),
                     tooltip: 'Delete Trainer',
-                    onPressed: () => widget.func4,
+                    onPressed: widget.func4,
                   ),
                   Text(
                     'Delete',
