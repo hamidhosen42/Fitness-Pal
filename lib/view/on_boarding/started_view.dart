@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common_widget/round_button.dart';
-import '../main_tab/main_tab_view.dart';
 
 class StartedView extends StatefulWidget {
   const StartedView({super.key});

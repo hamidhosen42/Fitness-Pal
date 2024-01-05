@@ -77,6 +77,7 @@ class _LoginViewState extends State<LoginView> {
                         controller: _passwordController,
                         hitText: "Password",
                         isRequired: true,
+                        obscureText: true,
                         secured: isPasswordSecured,
                         suffixIcon: IconButton(
                             onPressed: () {
@@ -122,17 +123,32 @@ class _LoginViewState extends State<LoginView> {
                               if (_emailController.text ==
                                       "sdshuvo4119@gmail.com" &&
                                   _passwordController.text == "123456") {
-                                showTopSnackBar(
-                                  Overlay.of(context),
-                                  CustomSnackBar.success(
-                                    message: "Login Successfully",
-                                  ),
-                                );
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (_) => BottomNavBar()),
-                                    (route) => false);
+                                try {
+                                  await _auth
+                                      .signInWithEmailAndPassword(
+                                          email: _emailController.text,
+                                          password: _passwordController.text)
+                                      .then((value) {
+                                    showTopSnackBar(
+                                      Overlay.of(context),
+                                      CustomSnackBar.success(
+                                        message: "Login Successfully",
+                                      ),
+                                    );
+                                    Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => BottomNavBar()),
+                                        (route) => false);
+                                  });
+                                } catch (e) {
+                                  showTopSnackBar(
+                                    Overlay.of(context),
+                                    CustomSnackBar.error(
+                                      message: e.toString(),
+                                    ),
+                                  );
+                                }
                               } else {
                                 try {
                                   await _auth
@@ -149,8 +165,7 @@ class _LoginViewState extends State<LoginView> {
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) =>
-                                                BottomNavBar()),
+                                            builder: (_) => MainTabView()),
                                         (route) => false);
                                   });
                                 } catch (e) {

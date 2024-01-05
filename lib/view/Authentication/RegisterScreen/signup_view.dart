@@ -96,6 +96,7 @@ class _SignUpViewState extends State<SignUpView> {
                         controller: _passwordController,
                         hitText: "Password",
                         isRequired: true,
+                        obscureText: true,
                         secured: isPasswordSecured,
                         suffixIcon: IconButton(
                             onPressed: () {
