@@ -1,12 +1,13 @@
 
 import 'package:flutter/material.dart';
+import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart';
 
 import '../../common/colo_extension.dart';
 import '../../common_widget/meal_food_schedule_row.dart';
 import '../../common_widget/nutritions_row.dart';
-import '../../helper/calender_helper/calendar.dart';
-import '../../helper/calender_helper/controller.dart';
-import '../../helper/calender_helper/typedata.dart';
+import '../../helper/calendar_agenda/calendar.dart';
+import '../../helper/calendar_agenda/controller.dart';
+import '../../helper/calendar_agenda/typedata.dart';
 
 class MealScheduleView extends StatefulWidget {
   const MealScheduleView({super.key});
