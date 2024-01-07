@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../dashboard/navigator.dart';
+import '../main_tab/main_tab_view.dart';
 import '../on_boarding/started_view.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -21,19 +22,26 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 5), () {
-     user.authStateChanges().listen((event) {
-          if (event == null && mounted) {
-            Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (_) => StartedView()),
-                (route) => false);
-          } else {
+      user.authStateChanges().listen((event) {
+        if (event == null && mounted) {
+          Navigator.pushAndRemoveUntil(
+              context,
+              MaterialPageRoute(builder: (_) => StartedView()),
+              (route) => false);
+        } else {
+          if (user.currentUser!.email == "sdshuvo4119@gmail.com") {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(builder: (_) => BottomNavBar()),
                 (route) => false);
+          } else {
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (_) => MainTabView()),
+                (route) => false);
           }
-        });
+        }
+      });
     });
   }
 
@@ -41,7 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     final size = MediaQuery.sizeOf(context);
     return Scaffold(
-      backgroundColor:Colors.white,
+      backgroundColor: Colors.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
