@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, unrelated_type_equality_checks
+// ignore_for_file: prefer_const_constructors, unrelated_type_equality_checks, use_build_context_synchronously
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -81,7 +81,7 @@ class _SelectViewState extends State<SelectView> {
                 onPressed: () {
                   Alert(
                       context: context,
-                      title: "DETAILS",
+                      title: "MEMBER",
                       content: TextField(
                         decoration: InputDecoration(
                           icon: Icon(Icons.person),
@@ -92,32 +92,32 @@ class _SelectViewState extends State<SelectView> {
                       buttons: [
                         DialogButton(
                           color: TColor.secondaryColor,
-                          onPressed: ()  {
-                            print(idController);
-
-                            if (fireStore
+                          onPressed: () async {
+                            DocumentReference<Map<String, dynamic>>
+                                documentReference = FirebaseFirestore.instance
                                     .collection("Members")
-                                    .doc(idController.text).snapshots() ==
-                                idController)
-                              {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) =>
-                                        const PaidWorkoutScreen(),
-                                  ),
-                                );
-                              }
-                            else
-                              {
-                                showTopSnackBar(
-                                  Overlay.of(context),
-                                  CustomSnackBar.error(
-                                    message: "Please give me correct Id",
-                                  ),
-                                );
-                              }
-                              idController.clear();
+                                    .doc(idController.text);
+                            DocumentSnapshot<Map<String, dynamic>> snapshot =
+                                await documentReference.get();
+
+                            if (snapshot.exists) {
+                              Map<String, dynamic> data = snapshot.data()!;
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) =>
+                                      PaidWorkoutScreen(data: data),
+                                ),
+                              );
+                            } else {
+                              showTopSnackBar(
+                                Overlay.of(context),
+                                CustomSnackBar.error(
+                                  message: "Please give me correct Id",
+                                ),
+                              );
+                            }
+                            idController.clear();
                           },
                           child: Text(
                             'SUBMIT',

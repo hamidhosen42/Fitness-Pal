@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'common/colo_extension.dart';
+import 'view/paid_workout/excercise.dart';
 import 'view/splashScreen/splash_screen.dart';
 
 void main() async{
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
           theme: ThemeData(
               primaryColor: TColor.primaryColor1, fontFamily: "Poppins"),
           home: const SplashScreen(),
+          // home: Excercise(),
         );
       },
     );

@@ -96,6 +96,16 @@ flutter:
     - assets/img/
     - assets/  
     - assets/images/
+    - assets/images/2.png
+    - assets/images/pushups.jpg
+    - assets/images/crunches.jpg
+    - assets/images/planks.jpg
+    - assets/images/climbers.jpg
+    - assets/images/squats.jpg
+    - assets/images/sideplanks.jpg
+    - assets/images/situps.jpg
+    - assets/images/pushups.jpg
+    - 
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
