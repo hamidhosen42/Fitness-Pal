@@ -1,4 +1,4 @@
-// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, avoid_unnecessary_containers, prefer_const_constructors, no_leading_underscores_for_local_identifiers, use_build_context_synchronously, prefer_const_literals_to_create_immutables
+// ignore_for_file: use_key_in_widget_constructors, library_private_types_in_public_api, avoid_unnecessary_containers, prefer_const_constructors, no_leading_underscores_for_local_identifiers, use_build_context_synchronously, prefer_const_literals_to_create_immutables, unused_local_variable
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';

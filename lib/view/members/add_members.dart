@@ -19,6 +19,7 @@ class _AddMembersState extends State<AddMembers> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _IDController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _regdateController = TextEditingController()
@@ -79,6 +80,11 @@ class _AddMembersState extends State<AddMembers> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                       MakeInput(
+                        label: 'ID',
+                        obscureText: false,
+                        controllerID: _IDController,
+                      ),
                       MakeInput(
                         label: 'Name',
                         obscureText: false,
@@ -187,6 +193,7 @@ class _AddMembersState extends State<AddMembers> {
                         FirebaseFirestore.instance.collection("Members").doc();
                     await data.set({
                       'id': data.id.toString(),
+                      'ID':_IDController.text,
                       'Name': _nameController.text,
                       'Address': _addressController.text,
                       'Phone_Number': _phoneController.text,

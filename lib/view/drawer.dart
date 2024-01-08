@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
@@ -71,9 +70,9 @@ class _AppDrawerState extends State<AppDrawer> {
                             final data = snapshot.data;
 
                             return CustomDG(
-                              name: data!['f_name'].toString(),
-                              gymname: data['f_name'].toString(),
-                              description: data['f_name'].toString(),
+                              f_name: data!['f_name'].toString(),
+                              l_name: data['l_name'].toString(),
+                              gymname: "Fitness Pal",
                             );
                           }
                         }),
@@ -100,7 +99,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   onPressed: () => {
                         Alert(
                             context: context,
-                            title: "DETAILS",
+                            title: "Pofile",
                             content: Column(
                               children: <Widget>[
                                 TextField(
@@ -116,13 +115,6 @@ class _AppDrawerState extends State<AppDrawer> {
                                     labelText: 'Your L-name',
                                   ),
                                   controller: gymnameController,
-                                ),
-                                TextField(
-                                  decoration: InputDecoration(
-                                    icon: Icon(Icons.info),
-                                    labelText: 'Description',
-                                  ),
-                                  controller: descriptionController,
                                 ),
                               ],
                             ),
@@ -143,7 +135,7 @@ class _AppDrawerState extends State<AppDrawer> {
                                   nameController.clear(),
                                   gymnameController.clear(),
                                   descriptionController.clear(),
-                                   Navigator.pop(context)
+                                  Navigator.pop(context)
                                 },
                                 child: Text(
                                   'UPDATE',

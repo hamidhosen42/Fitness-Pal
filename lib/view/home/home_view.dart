@@ -1,8 +1,7 @@
-// ignore_for_file: use_key_in_widget_constructors, avoid_function_literals_in_foreach_calls, prefer_const_constructors, unnecessary_this, prefer_const_literals_to_create_immutables
+// ignore_for_file: use_key_in_widget_constructors, avoid_function_literals_in_foreach_calls, prefer_const_constructors, unnecessary_this, prefer_const_literals_to_create_immutables, library_prefixes, deprecated_member_use
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/view/home/notification_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,6 +10,9 @@ import '../../components/daily_tip.dart';
 import '../../components/mage_card_with_internal.dart';
 import '../../components/Section.dart';
 import '../../components/main_card_programs.dart';
+import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
+
+import '../profile/profile_view.dart';
 
 class HomeView extends StatefulWidget {
   @override
@@ -35,11 +37,15 @@ class _HomeViewState extends State<HomeView> {
       var time = doc['time'];
       var url = doc['url'];
 
-      var widget = ImageCardWithInternal(
-        image: image,
-        title: title,
-        duration: time,
-        url: url,
+      var widget = InkWell(
+        onTap: () {
+          UrlLauncher.launch(url.toString());
+        },
+        child: ImageCardWithInternal(
+          image: image,
+          title: title,
+          duration: time,
+        ),
       );
 
       // Add the widget to the list
@@ -100,16 +106,11 @@ class _HomeViewState extends State<HomeView> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const NotificationView(),
+                              builder: (context) => ProfileView(),
                             ),
                           );
                         },
-                        icon: Image.asset(
-                          "assets/img/notification_active.png",
-                          width: 25,
-                          height: 25,
-                          fit: BoxFit.fitHeight,
-                        ))
+                        icon: Icon(Icons.person))
                   ],
                 ),
                 MainCardPrograms(), // MainCard
@@ -130,26 +131,29 @@ class _HomeViewState extends State<HomeView> {
                   },
                 ),
 
-                Section(
-                  title: 'Abs Generating',
-                  horizontalList: [
-                    ImageCardWithInternal(
-                      image: 'assets/images/image004.jpg',
-                      title: 'Core \nWorkout',
-                      duration: '7 min',
-                    ),
-                    ImageCardWithInternal(
-                      image: 'assets/images/image004.jpg',
-                      title: 'Core \nWorkout',
-                      duration: '7 min',
-                    ),
-                    ImageCardWithInternal(
-                      image: 'assets/images/image004.jpg',
-                      title: 'Core \nWorkout',
-                      duration: '7 min',
-                    ),
-                  ],
-                ),
+                // Section(
+                //   title: 'Abs Generating',
+                //   horizontalList: [
+                //     ImageCardWithInternal(
+                //       image:
+                //           'https://firebasestorage.googleapis.com/v0/b/fitnesspal-2744b.appspot.com/o/image005.jpg?alt=media&token=ec588623-21b2-436c-8a49-7d92bb3fe4af',
+                //       title: 'Core \nWorkout',
+                //       duration: '7 min',
+                //     ),
+                //     ImageCardWithInternal(
+                //       image:
+                //           'https://firebasestorage.googleapis.com/v0/b/fitnesspal-2744b.appspot.com/o/image005.jpg?alt=media&token=ec588623-21b2-436c-8a49-7d92bb3fe4af',
+                //       title: 'Core \nWorkout',
+                //       duration: '7 min',
+                //     ),
+                //     ImageCardWithInternal(
+                //       image:
+                //           'https://firebasestorage.googleapis.com/v0/b/fitnesspal-2744b.appspot.com/o/image005.jpg?alt=media&token=ec588623-21b2-436c-8a49-7d92bb3fe4af',
+                //       title: 'Core \nWorkout',
+                //       duration: '7 min',
+                //     ),
+                //   ],
+                // ),
                 Container(
                   margin: EdgeInsets.only(top: 50.0),
                   padding: EdgeInsets.only(top: 10.0, bottom: 40.0),

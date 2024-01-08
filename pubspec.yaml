@@ -59,6 +59,7 @@ dependencies:
   bubble_tab_indicator: 
   url_launcher: 
   percent_indicator: ^4.2.3
+  image_picker: ^1.0.6
 
 dependency_overrides: 
   intl: ^0.18.1

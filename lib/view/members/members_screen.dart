@@ -117,6 +117,7 @@ class _MembersScreenState extends State<MembersScreen> {
 
                         return CustomCardM(
                           name: data['Name'].toString(),
+                          ID:data['ID'].toString(),
                           phoneNumber: data['Phone_Number'].toString(),
                           regdate: data['Reg_Date'].toString(),
                           paydate: data['Payment_Date'].toString(),

@@ -10,7 +10,7 @@ import 'package:top_snackbar_flutter/top_snack_bar.dart';
 import '../../../components/round_button.dart';
 import '../../../components/round_textfield.dart';
 import '../../dashboard/navigator.dart';
-import '../../main_tab/main_tab_view.dart';
+import '../../home/home_view.dart';
 import '../ForgotScreen/forgot_screen.dart';
 
 class LoginView extends StatefulWidget {
@@ -165,7 +165,7 @@ class _LoginViewState extends State<LoginView> {
                                     Navigator.pushAndRemoveUntil(
                                         context,
                                         MaterialPageRoute(
-                                            builder: (_) => MainTabView()),
+                                            builder: (_) => HomeView()),
                                         (route) => false);
                                   });
                                 } catch (e) {

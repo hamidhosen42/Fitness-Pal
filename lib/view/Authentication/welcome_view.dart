@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/colo_extension.dart';
 import '../../components/round_button.dart';
-import '../main_tab/main_tab_view.dart';
+import '../home/home_view.dart';
 
 class WelcomeView extends StatefulWidget {
   const WelcomeView({super.key});
@@ -56,7 +56,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const MainTabView()));
+                            builder: (context) => HomeView()));
                   }),
               SizedBox(
                 height: 20.h,

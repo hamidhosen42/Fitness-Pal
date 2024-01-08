@@ -3,10 +3,11 @@
 import 'package:flutter/material.dart';
 
 class CustomDG extends StatefulWidget {
-  final String? name;
+  final String? f_name;
+  final String? l_name;
   final String? gymname;
   final String? description;
-  const CustomDG({this.name, this.gymname, this.description});
+  const CustomDG({this.f_name,this.l_name, this.gymname, this.description});
   @override
   _CustomDGState createState() => _CustomDGState();
 }
@@ -23,7 +24,7 @@ class _CustomDGState extends State<CustomDG> {
         ),
         const SizedBox(height: 5.0),
         Text(
-          widget.name.toString(),
+          "${widget.f_name.toString()} ${widget.l_name.toString()}",
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
         ),
@@ -39,19 +40,7 @@ class _CustomDGState extends State<CustomDG> {
           style: TextStyle(
               color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
         ),
-        SizedBox(height: 10.0),
-        Text(
-          'Description:',
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20.0),
-        ),
-        SizedBox(height: 5.0),
-        Text(
-          widget.description.toString(),
-          textAlign: TextAlign.center,
-          style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18.0),
-        ),
+    
       ],
     );
   }

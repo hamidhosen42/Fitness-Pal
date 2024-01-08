@@ -2,10 +2,10 @@
 
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fitness/view/home/home_view.dart';
 import 'package:flutter/material.dart';
 
 import '../dashboard/navigator.dart';
-import '../main_tab/main_tab_view.dart';
 import '../on_boarding/started_view.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -37,7 +37,7 @@ class _SplashScreenState extends State<SplashScreen> {
           } else {
             Navigator.pushAndRemoveUntil(
                 context,
-                MaterialPageRoute(builder: (_) => MainTabView()),
+                MaterialPageRoute(builder: (_) => HomeView()),
                 (route) => false);
           }
         }

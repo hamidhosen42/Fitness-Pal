@@ -11,6 +11,7 @@ class CustomCardM extends StatefulWidget {
   final String? paydate;
   final String? fee;
   final String? imagePath;
+  final String? ID;
   final void Function()? func1;
   final void Function()? func2;
   final void Function()? func3;
@@ -18,6 +19,7 @@ class CustomCardM extends StatefulWidget {
 
   CustomCardM(
       {this.name,
+      this.ID,
       this.phoneNumber,
       this.regdate,
       this.paydate,
@@ -63,6 +65,13 @@ class _CustomCardMState extends State<CustomCardM> {
               ),
               Column(
                 children: [
+                  Text(
+                    "MEMBER ID: ${widget.ID.toString()}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0),
+                  ),
                   Text(
                     widget.name.toString(),
                     style: TextStyle(
