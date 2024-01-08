@@ -165,9 +165,18 @@ class _HomeViewState extends State<HomeView> {
                       Section(
                         title: "Daily Tips",
                         horizontalList: <Widget>[
-                          DailyTip(),
-                          DailyTip(),
-                          DailyTip(),
+                          DailyTip(
+                              title: "3 Main workout tips",
+                              subtitle:
+                                  "The American Council on Exercises (ACE) recently surveyed 3,000 ACE-certificated personal trainers about the best!",
+                              image:
+                                  "https://images.pexels.com/photos/3289711/pexels-photo-3289711.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500&fbclid=IwAR3Ab90Q9LjhoAfHKlsjTaFuddkf8QyEL-dgJujLT8_Y_xdzT_RY3gdh9Qc"),
+                          DailyTip(
+                              title: "2 Main workout tips",
+                              subtitle:
+                                  "The American Council on Exercises (ACE) recently surveyed 3,000 ACE-certificated personal trainers about the best!",
+                              image:
+                                  "https://watermark.lovepik.com/photo/20211124/large/lovepik-gym-exercise-male-warm-up-picture_500910761.jpg?fbclid=IwAR32A1OcHIXYdFmRyZqDjH5dBZH0Ju_bh6eB4Qe2Ix-fG1UdKwV3dCB-HCI"),
                         ],
                       ),
                     ],

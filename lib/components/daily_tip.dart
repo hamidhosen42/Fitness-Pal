@@ -1,14 +1,13 @@
-// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: use_key_in_widget_constructors, prefer_const_constructors, prefer_const_constructors_in_immutables
 
 import 'package:flutter/material.dart';
 
 class DailyTip extends StatelessWidget {
+  final String title;
+  final String subtitle;
+  final String image;
+  DailyTip({required this.title, required this.subtitle, required this.image});
 
-  final Map<String, String> element = {
-    'title': '3 Main workout tips',
-    'subtitle': 'The American Council on Exercises (ACE) recently surveyed 3,000 ACE-certificated personal trainers about the best!',
-    'image': 'assets/images/image011.jpg',
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class DailyTip extends StatelessWidget {
           ),
           decoration: BoxDecoration(
             image: DecorationImage(
-              image: AssetImage(element['image']!),
+              image: NetworkImage(image),
               fit: BoxFit.fill,
             ),
             borderRadius: BorderRadius.all(
@@ -35,14 +34,14 @@ class DailyTip extends StatelessWidget {
           ),
         ),
         Text(
-          element['title']!,
+          title,
           style: TextStyle(fontSize: 14.0),
         ),
         Container(
           width: width,
           margin: EdgeInsets.only(top: 10.0),
           child: Text(
-            element['subtitle']!,
+            subtitle,
             style: TextStyle(
               color: Colors.black45,
               fontSize: 14.0,

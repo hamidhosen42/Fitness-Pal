@@ -25,6 +25,24 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   var heightController = TextEditingController();
   var weightController = TextEditingController();
 
+
+  
+  @override
+  void initState() {
+    super.initState();
+    // Initialize controllers and image here
+    initControllers();
+  }
+
+  void initControllers() {
+    fnameController.text = "";
+    lnameController.text = "";
+    emailController.text = "";
+    heightController.text = "";
+    weightController.text = "";
+    _image = null;
+  }
+
   File? _image;
   final _picker = ImagePicker();
 

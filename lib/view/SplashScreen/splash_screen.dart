@@ -6,6 +6,7 @@ import 'package:fitness/view/home/home_view.dart';
 import 'package:flutter/material.dart';
 
 import '../dashboard/navigator.dart';
+import '../on_boarding/on_boarding_view.dart';
 import '../on_boarding/started_view.dart';
 
 class SplashScreen extends StatefulWidget {

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../components/round_button.dart';
+import '../Authentication/RegisterScreen/signup_view.dart';
 
 class StartedView extends StatefulWidget {
   const StartedView({super.key});
@@ -76,11 +77,10 @@ class _StartedViewState extends State<StartedView> {
                       if (isChangeColor) {
                         //GO Next Screen
 
-                       Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const OnBoardingView()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SignUpView()));
                       } else {
                         //Change Color
                         setState(() {
