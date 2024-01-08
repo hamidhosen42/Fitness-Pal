@@ -4,7 +4,7 @@ import 'package:simple_animation_progress_bar/simple_animation_progress_bar.dart
 
 import '../../common/colo_extension.dart';
 import '../../common/common.dart';
-import '../../common_widget/round_button.dart';
+import '../../components/round_button.dart';
 
 class ResultView extends StatefulWidget {
   final DateTime date1;

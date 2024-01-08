@@ -2,13 +2,13 @@
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fitness/common/colo_extension.dart';
-import 'package:fitness/common_widget/round_button.dart';
-import 'package:fitness/common_widget/round_textfield.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
+import '../../../components/round_button.dart';
+import '../../../components/round_textfield.dart';
 import '../../dashboard/navigator.dart';
 import '../../main_tab/main_tab_view.dart';
 import '../ForgotScreen/forgot_screen.dart';

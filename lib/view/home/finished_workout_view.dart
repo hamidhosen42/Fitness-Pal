@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/colo_extension.dart';
-import '../../common_widget/round_button.dart';
+import '../../components/round_button.dart';
 
 class FinishedWorkoutView extends StatefulWidget {
   const FinishedWorkoutView({super.key});

@@ -8,7 +8,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;
 
 import '../../common/colo_extension.dart';
-import '../../common_widget/custom_card_money.dart';
+import '../../components/custom_card_money.dart';
 import '../drawer.dart';
 
 class ViewExpense extends StatefulWidget {

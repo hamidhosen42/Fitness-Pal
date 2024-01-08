@@ -6,7 +6,7 @@ import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 import '../../common/colo_extension.dart';
-import '../../common_widget/custom_card_money.dart';
+import '../../components/custom_card_money.dart';
 import '../drawer.dart';
 
 class ViewIncome extends StatefulWidget {

@@ -2,9 +2,9 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/colo_extension.dart';
-import '../../common_widget/find_eat_cell.dart';
-import '../../common_widget/round_button.dart';
-import '../../common_widget/today_meal_row.dart';
+import '../../components/find_eat_cell.dart';
+import '../../components/round_button.dart';
+import '../../components/today_meal_row.dart';
 import 'meal_food_details_view.dart';
 import 'meal_schedule_view.dart';
 

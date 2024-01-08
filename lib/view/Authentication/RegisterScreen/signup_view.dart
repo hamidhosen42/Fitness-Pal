@@ -8,9 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
-
-import '../../../common_widget/round_button.dart';
-import '../../../common_widget/round_textfield.dart';
+import '../../../components/round_button.dart';
+import '../../../components/round_textfield.dart';
 import '../LoginScreen/login_view.dart';
 
 class SignUpView extends StatefulWidget {

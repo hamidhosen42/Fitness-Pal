@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/colo_extension.dart';
-import 'Bottomnavbar.dart';
 import 'excercise.dart';
 
 class PaidWorkoutScreen extends StatefulWidget {
@@ -21,13 +20,9 @@ class _PaidWorkoutScreenState extends State<PaidWorkoutScreen> {
   final fireStore = FirebaseFirestore.instance;
 
   List week = [
-    "Week 1",
-    "Week 2",
-    "Week 3",
-    "Week 4",
-    "Week 5",
-    "Week 6",
-    "Week 7"
+    "Beginner",
+    "Intermediate",
+    "Professional",
   ];
   @override
   Widget build(BuildContext context) {
@@ -70,7 +65,7 @@ class _PaidWorkoutScreenState extends State<PaidWorkoutScreen> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                'Get your body changing within 6 \n weeks',
+                'Get your body changing within 3 Courses',
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
               ),
               SizedBox(
@@ -111,7 +106,6 @@ class _PaidWorkoutScreenState extends State<PaidWorkoutScreen> {
               //         }
               //       })),
               // ),
-
               Container(
                 height: 700.h,
                 decoration: BoxDecoration(
@@ -140,16 +134,16 @@ class _PaidWorkoutScreenState extends State<PaidWorkoutScreen> {
                             title: Text(week[index],
                                 style: TextStyle(
                                     fontSize: 18, fontWeight: FontWeight.bold)),
-                                  // trailing: Container(
-                                  //   decoration: BoxDecoration(
-                                  //     color: Colors.yellow,
-                                  //     borderRadius: BorderRadius.circular(50),
-                                  //   ),
-                                  //   child: Icon(
-                                  //     Icons.check,
-                                  //     color: Colors.white,
-                                  //   ),
-                                  // ),
+                            // trailing: Container(
+                            //   decoration: BoxDecoration(
+                            //     color: Colors.yellow,
+                            //     borderRadius: BorderRadius.circular(50),
+                            //   ),
+                            //   child: Icon(
+                            //     Icons.check,
+                            //     color: Colors.white,
+                            //   ),
+                            // ),
                           ),
                         ),
                       );

@@ -58,6 +58,7 @@ dependencies:
   simple_animations: 
   bubble_tab_indicator: 
   url_launcher: 
+  percent_indicator: ^4.2.3
 
 dependency_overrides: 
   intl: ^0.18.1
@@ -71,8 +72,8 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
-  flutter_launcher_icons: "^0.11.0"
+  flutter_lints: 
+  flutter_launcher_icons: 
     
 flutter_icons:
   android: "launcher_icon"

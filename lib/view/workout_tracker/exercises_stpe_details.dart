@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:readmore/readmore.dart';
 
 import '../../common/colo_extension.dart';
-import '../../common_widget/round_button.dart';
-import '../../common_widget/step_detail_row.dart';
+import '../../components/round_button.dart';
+import '../../components/step_detail_row.dart';
 
 class ExercisesStepDetails extends StatefulWidget {
   final Map eObj;

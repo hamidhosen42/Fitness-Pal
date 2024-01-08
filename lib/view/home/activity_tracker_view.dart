@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../../common/colo_extension.dart';
-import '../../common_widget/latest_activity_row.dart';
-import '../../common_widget/today_target_cell.dart';
+import '../../components/latest_activity_row.dart';
+import '../../components/today_target_cell.dart';
 
 class ActivityTrackerView extends StatefulWidget {
   const ActivityTrackerView({super.key});

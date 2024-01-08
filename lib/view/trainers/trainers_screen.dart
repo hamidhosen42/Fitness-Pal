@@ -10,7 +10,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-import '../../common_widget/custom_card_t.dart';
+import '../../components/custom_card_t.dart';
 import '../drawer.dart';
 import 'add_trainers.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;

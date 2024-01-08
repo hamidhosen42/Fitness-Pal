@@ -9,7 +9,7 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
 import '../../common/colo_extension.dart';
-import '../../common_widget/make_input.dart';
+import '../../components/make_input.dart';
 
 class AddEquipments extends StatefulWidget {
   @override

@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 import 'package:top_snackbar_flutter/top_snack_bar.dart';
 
-import '../../common_widget/round_button.dart';
-import '../../common_widget/round_textfield.dart';
+import '../../components/round_button.dart';
+import '../../components/round_textfield.dart';
+
 
 class CompleteProfileView extends StatefulWidget {
   const CompleteProfileView({super.key});

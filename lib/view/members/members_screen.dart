@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 import '../../common/colo_extension.dart';
-import '../../common_widget/custom_card_m.dart';
+import '../../components/custom_card_m.dart';
 import '../drawer.dart';
 import 'add_members.dart';
 import 'package:url_launcher/url_launcher.dart' as UrlLauncher;

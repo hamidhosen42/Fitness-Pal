@@ -1,9 +1,11 @@
 
+// ignore_for_file: prefer_final_fields
+
 import 'package:flutter/material.dart';
 
 import '../../common/colo_extension.dart';
-import '../../common_widget/meal_food_schedule_row.dart';
-import '../../common_widget/nutritions_row.dart';
+import '../../components/meal_food_schedule_row.dart';
+import '../../components/nutritions_row.dart';
 import '../../helper/calender_helper/calendar.dart';
 import '../../helper/calender_helper/controller.dart';
 import '../../helper/calender_helper/typedata.dart';
