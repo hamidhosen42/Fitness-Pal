@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fitness/view/home/activity_detail.dart';
 import 'package:fitness/view/home/notification_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -11,65 +10,44 @@ import '../../common/colo_extension.dart';
 import '../../components/daily_tip.dart';
 import '../../components/mage_card_with_internal.dart';
 import '../../components/Section.dart';
-import '../../components/image_card_with_basic_footer.dart';
 import '../../components/main_card_programs.dart';
-import '../../model/exercise.dart';
 
-class HomeView extends StatelessWidget {
-  final List<Exercise> exercises = [
-    Exercise(
-      image: 'assets/images/image001.jpg',
-      title: 'Easy Start',
-      time: '5 min',
-      difficult: 'Low',
-    ),
-    Exercise(
-      image: 'assets/images/image002.jpg',
-      title: 'Medium Start',
-      time: '10 min',
-      difficult: 'Medium',
-    ),
-    Exercise(
-      image: 'assets/images/image003.jpg',
-      title: 'Pro Start',
-      time: '25 min',
-      difficult: 'High',
-    )
-  ];
+class HomeView extends StatefulWidget {
+  @override
+  State<HomeView> createState() => _HomeViewState();
+}
 
-  List<Widget> generateList(BuildContext context) {
-    List<Widget> list = [];
-    int count = 0;
-    exercises.forEach((exercise) {
-      Widget element = Container(
-        margin: EdgeInsets.only(right: 20.0),
-        child: GestureDetector(
-          child: ImageCardWithBasicFooter(
-            exercise: exercise,
-            tag: 'imageHeader$count',
-          ),
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) {
-                  return ActivityDetail(
-                    exercise: exercise,
-                    tag: 'imageHeader$count',
-                  );
-                },
-              ),
-            );
-          },
-        ),
-      );
-      list.add(element);
-      count++;
-    });
-    return list;
-  }
-
+class _HomeViewState extends State<HomeView> {
   final fireStore = FirebaseFirestore.instance;
+  List firebaseSliders = [];
+
+  // Updated getSlider to be asynchronous and return a List<Widget>
+  Future<List<Widget>> getSlider(BuildContext context) async {
+    var data = await fireStore.collection('burning').get();
+    List<Widget> sliderList = [];
+
+    // Process data.docs and create a list of widgets
+    data.docs.forEach((doc) {
+      // Extract relevant data from the document and create a Widget
+      // Adjust the logic based on your data structure
+      var image = doc['image'];
+      var title = doc['title'];
+      var time = doc['time'];
+      var url = doc['url'];
+
+      var widget = ImageCardWithInternal(
+        image: image,
+        title: title,
+        duration: time,
+        url: url,
+      );
+
+      // Add the widget to the list
+      sliderList.add(widget);
+    });
+
+    return sliderList;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +56,7 @@ class HomeView extends StatelessWidget {
       body: SingleChildScrollView(
         child: SafeArea(
           child: Container(
-            padding:  const EdgeInsets.symmetric(horizontal: 15,vertical: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             child: Column(
               children: <Widget>[
                 Row(
@@ -135,10 +113,23 @@ class HomeView extends StatelessWidget {
                   ],
                 ),
                 MainCardPrograms(), // MainCard
-                Section(
-                  title: 'Fat burning',
-                  horizontalList: this.generateList(context),
+                FutureBuilder<List<Widget>>(
+                  future: getSlider(context),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return CircularProgressIndicator(color: Colors.black);
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    } else {
+                      // Display the list of widgets from the future
+                      return Section(
+                        title: 'Fat burning',
+                        horizontalList: snapshot.data!,
+                      );
+                    }
+                  },
                 ),
+
                 Section(
                   title: 'Abs Generating',
                   horizontalList: [
