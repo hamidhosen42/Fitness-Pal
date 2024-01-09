@@ -12,6 +12,7 @@ import '../../../components/round_textfield.dart';
 import '../../dashboard/navigator.dart';
 import '../../home/home_view.dart';
 import '../ForgotScreen/forgot_screen.dart';
+import '../RegisterScreen/signup_view.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -187,7 +188,8 @@ class _LoginViewState extends State<LoginView> {
                 ),
                 TextButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                       Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => SignUpView()));
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,

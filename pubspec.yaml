@@ -60,6 +60,7 @@ dependencies:
   url_launcher: 
   percent_indicator: ^4.2.3
   image_picker: ^1.0.6
+  get: ^4.6.5
 
 dependency_overrides: 
   intl: ^0.18.1

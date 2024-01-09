@@ -442,6 +442,9 @@ class _ProfileViewState extends State<ProfileView> {
                 GestureDetector(
                   onTap: () async {
                     await FirebaseAuth.instance.signOut();
+                    // // Get.offAll(() => LoginPage());
+                    //   Navigator.push(context,
+                    //     MaterialPageRoute(builder: (_) => LoginView()));
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (_) => LoginView()),

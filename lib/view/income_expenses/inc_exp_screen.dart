@@ -197,7 +197,7 @@ class _IncExpScreenState extends State<IncExpScreen> {
                               size: 40.0,
                             ),
                             Text(
-                              'Add New Incomes',
+                              'Add New Expenses',
                               style: TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700,
